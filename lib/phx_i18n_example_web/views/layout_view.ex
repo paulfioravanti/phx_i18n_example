@@ -20,8 +20,15 @@ defmodule PhxI18nExampleWeb.LayoutView do
   def current_locale_link(path, current_locale, show_available_locales) do
     params = "?show_available_locales=#{!show_available_locales}"
 
-    link(to: path <> params, class: current_selection_link()) do
-      content_tag(:p, class: current_selection(show_available_locales)) do
+    link(
+      to: path <> params,
+      class: current_selection_link(),
+      id: "current_locale_link"
+    ) do
+      content_tag(:p,
+        class: current_selection(show_available_locales),
+        id: "current_locale"
+      ) do
         [
           content_tag(:span, locale_to_string(current_locale)),
           content_tag(:span, "▾", class: caret())
