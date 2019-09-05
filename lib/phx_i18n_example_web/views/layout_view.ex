@@ -23,7 +23,8 @@ defmodule PhxI18nExampleWeb.LayoutView do
     link(
       to: path <> params,
       class: current_selection_link(),
-      id: "current_locale_link"
+      id: "current_locale_link",
+      role: "locale_link"
     ) do
       content_tag(:p,
         class: current_selection(show_available_locales),
@@ -40,7 +41,11 @@ defmodule PhxI18nExampleWeb.LayoutView do
   def locale_link(path, locale) do
     params = "?locale=#{locale}"
 
-    link(to: path <> params, class: dropdown_list_item_link()) do
+    link(
+      to: path <> params,
+      class: dropdown_list_item_link(),
+      role: "locale_link"
+    ) do
       content_tag(:li, locale_to_string(locale), class: dropdown_list_item())
     end
   end

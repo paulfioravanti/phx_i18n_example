@@ -1,52 +1,45 @@
-const TOP_BORDER_RADIUS_ONLY = "br--top"
-const DROPDOWN_VISIBLE_CLASSES = ["flex", "flex-column"]
-const DROPDOWN_HIDDEN_CLASS = "dn"
+export { LocaleDropdown }
 
-document.getElementsByTagName("main")[0].onclick = function() {
-  const dropdownClassList =
-    document
-      .getElementById("locale_dropdown")
-      .classList
+const LocaleDropdown = (() => {
+  // REF: https://tachyons.io/docs/table-of-styles/
+  const TOP_BORDER_RADIUS_ONLY = "br--top"
+  const DROPDOWN_VISIBLE_CLASSES = ["flex", "flex-column"]
+  const DROPDOWN_HIDDEN_CLASS = "dn"
 
-  if (isVisible(dropdownClassList)) {
-    hide(dropdownClassList)
-    setCurrentLocaleLinkToOpenDropdownMenu()
-    indicateAvailableLocalesAreHidden()
-    resetCurrentLocaleBorderRadius()
+  return {
+    hide: hide
   }
-}
 
-document.getElementById("current_locale_link").onclick = function(event) {
-  // When the current locale is clicked, we do not want the link to also
-  // propagate to the click handler on the `main` tag.
-  event.stopPropagation()
-}
+  function hide(localeDropdown, currentLocale, currentLocaleLink) {
+    const dropdownClassList = localeDropdown.classList
 
-function isVisible(dropdownClassList) {
-  return dropdownClassList.contains(DROPDOWN_VISIBLE_CLASSES[0])
-}
+    if (isVisible(dropdownClassList)) {
+      hideLocaleDropdown(dropdownClassList)
+      setCurrentLocaleLinkToOpenDropdownMenu(currentLocaleLink)
+      resetCurrentLocaleBottomBorderRadius(currentLocale)
+    }
+  }
 
-function hide(dropdownClassList) {
-  dropdownClassList.remove(...DROPDOWN_VISIBLE_CLASSES)
-  dropdownClassList.add(DROPDOWN_HIDDEN_CLASS)
-}
+  function isVisible(dropdownClassList) {
+    return (
+      DROPDOWN_VISIBLE_CLASSES.some(value => {
+        return dropdownClassList.contains(value)
+      })
+    )
+  }
 
-function setCurrentLocaleLinkToOpenDropdownMenu() {
-  document
-    .getElementById("current_locale_link")
-    .setAttribute("href", "/?show_available_locales=true")
-}
+  function hideLocaleDropdown(dropdownClassList) {
+    dropdownClassList.remove(...DROPDOWN_VISIBLE_CLASSES)
+    dropdownClassList.add(DROPDOWN_HIDDEN_CLASS)
+  }
 
-function indicateAvailableLocalesAreHidden() {
-  // This is really here just for a UX perspective...
-  window
-    .history
-    .pushState({}, document.title, "/?show_available_locales=false")
-}
+  function setCurrentLocaleLinkToOpenDropdownMenu(currentLocaleLink) {
+    currentLocaleLink.setAttribute("href", "/?show_available_locales=true")
+  }
 
-function resetCurrentLocaleBorderRadius() {
-  document
-    .getElementById("current_locale")
-    .classList
-    .remove(TOP_BORDER_RADIUS_ONLY)
-}
+  function resetCurrentLocaleBottomBorderRadius(currentLocale) {
+    currentLocale
+      .classList
+      .remove(TOP_BORDER_RADIUS_ONLY)
+  }
+})()

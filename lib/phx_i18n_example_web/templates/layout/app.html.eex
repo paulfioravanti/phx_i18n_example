@@ -9,7 +9,7 @@
           href="<%= Routes.static_path(@conn, "/css/app.css") %>" />
   </head>
   <body>
-    <main role="main" class="<%= main() %>">
+    <main role="main" class="<%= main() %>" id="main">
       <%= render PhxI18nExampleWeb.LayoutView,
                  "language_dropdown.html",
                  path: @conn.request_path,
