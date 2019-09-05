@@ -16,41 +16,4 @@ import "tachyons"
 //
 // Local files can be imported directly using relative paths, for example:
 // import socket from "./socket"
-document.getElementById("current_locale_link").onclick = function(event) {
-  event.stopPropagation()
-}
-
-document.querySelectorAll('[role="main"]')[0].onclick = function() {
-  const dropdownClassList =
-    document.getElementById("locale_dropdown").classList
-
-  if (isVisible(dropdownClassList)) {
-    hide(dropdownClassList)
-    setCurrentLocaleLinkToOpenDropdownMenu()
-    indicateAvailableLocalesAreHidden()
-    resetCurrentLocaleBorderRadius()
-  }
-}
-
-function isVisible(dropdownClassList) {
-  return dropdownClassList.contains("flex")
-}
-
-function hide(dropdownClassList) {
-  dropdownClassList.remove("flex", "flex-column")
-  dropdownClassList.add("dn")
-}
-
-function setCurrentLocaleLinkToOpenDropdownMenu() {
-  document.getElementById("current_locale_link").setAttribute(
-    "href", "/?show_available_locales=true"
-  )
-}
-
-function indicateAvailableLocalesAreHidden() {
-  window.history.pushState({}, document.title, "/?show_available_locales=false")
-}
-
-function resetCurrentLocaleBorderRadius() {
-  document.getElementById("current_locale").classList.remove("br--top")
-}
+import "./locale_dropdown"
