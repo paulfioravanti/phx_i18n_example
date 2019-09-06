@@ -12,7 +12,9 @@ defmodule PhxI18nExampleWeb.LanguageDropdownStyle do
     pointer
     tc
     w4
-  ] |> Enum.join(" ")
+  ]
+
+  @current_selection_border_radius_classes "br--top"
 
   @current_selection_link_classes ~w[
     no-underline
@@ -47,7 +49,19 @@ defmodule PhxI18nExampleWeb.LanguageDropdownStyle do
     tc
     top-0
     w4
+  ]
+
+  @dropdown_show_classes ~w[
+    flex
+    flex-column
   ] |> Enum.join(" ")
+
+  @dropdown_hide_classes "dn"
+
+  @dropdown_visible_classes ~w[
+    flex
+    flex-column
+  ]
 
   @dropdown_list_item_classes ~w[
     hover-bg-white
@@ -78,12 +92,12 @@ defmodule PhxI18nExampleWeb.LanguageDropdownStyle do
   def current_selection(show_available_locales) do
     display_classes =
       if show_available_locales do
-        " br--top"
+        [@current_selection_border_radius_classes | @current_selection_classes]
       else
-        ""
+        @current_selection_classes
       end
 
-    @current_selection_classes <> display_classes
+    Enum.join(display_classes, " ")
   end
 
   def current_selection_link, do: @current_selection_link_classes
@@ -93,12 +107,12 @@ defmodule PhxI18nExampleWeb.LanguageDropdownStyle do
   def dropdown_list(show_available_locales) do
     display_classes =
       if show_available_locales do
-        " flex flex-column"
+        [@dropdown_show_classes | @dropdown_list_classes]
       else
-        " dn"
+        [@dropdown_hide_classes | @dropdown_list_classes]
       end
 
-    @dropdown_list_classes <> display_classes
+    Enum.join(display_classes, " ")
   end
 
   def dropdown_list_item, do: @dropdown_list_item_classes
