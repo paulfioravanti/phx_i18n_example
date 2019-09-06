@@ -1,8 +1,8 @@
 <div class="<%= dropdown_container() %>">
-  <%= current_locale_link(@path, @current_locale, @show_available_locales) %>
-  <ul class="<%= dropdown_list(@show_available_locales) %>" id="locale_dropdown">
+  <%= current_locale(@path, @current_locale) %>
+  <ul class="<%= dropdown_list() %>" id="locale_dropdown">
     <%= for locale <- @selectable_locales do %>
-      <%= locale_link(@path, locale) %>
+      <%= locale(@path, locale) %>
     <% end %>
   </ul>
 </div>

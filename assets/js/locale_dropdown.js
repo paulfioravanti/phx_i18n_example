@@ -7,20 +7,21 @@ const LocaleDropdown = (() => {
   const DROPDOWN_HIDDEN_CLASS = "dn"
 
   return {
-    hide: hide
+    hide: hide,
+    isVisible: isVisible,
+    show: show
   }
 
   function hide(localeDropdown, currentLocale, currentLocaleLink) {
-    const dropdownClassList = localeDropdown.classList
-
-    if (isVisible(dropdownClassList)) {
-      hideLocaleDropdown(dropdownClassList)
-      setCurrentLocaleLinkToOpenDropdownMenu(currentLocaleLink)
-      resetCurrentLocaleBottomBorderRadius(currentLocale)
+    if (isVisible(localeDropdown)) {
+      hideLocaleDropdown(localeDropdown)
+      removeCurrentLocaleBottomBorderRadius(currentLocale)
     }
   }
 
-  function isVisible(dropdownClassList) {
+  function isVisible(localeDropdown) {
+    const dropdownClassList = localeDropdown.classList
+
     return (
       DROPDOWN_VISIBLE_CLASSES.some(value => {
         return dropdownClassList.contains(value)
@@ -28,18 +29,34 @@ const LocaleDropdown = (() => {
     )
   }
 
-  function hideLocaleDropdown(dropdownClassList) {
+  function show(localeDropdown, currentLocale, currentLocaleLink) {
+    if (!isVisible(localeDropdown)) {
+      showLocaleDropdown(localeDropdown)
+      addCurrentLocaleBottomBorderRadius(currentLocale)
+    }
+  }
+
+  function hideLocaleDropdown(localeDropdown) {
+    const dropdownClassList = localeDropdown.classList
     dropdownClassList.remove(...DROPDOWN_VISIBLE_CLASSES)
     dropdownClassList.add(DROPDOWN_HIDDEN_CLASS)
   }
 
-  function setCurrentLocaleLinkToOpenDropdownMenu(currentLocaleLink) {
-    currentLocaleLink.setAttribute("href", "/?show_available_locales=true")
+  function showLocaleDropdown(localeDropdown) {
+    const dropdownClassList = localeDropdown.classList
+    dropdownClassList.add(...DROPDOWN_VISIBLE_CLASSES)
+    dropdownClassList.remove(DROPDOWN_HIDDEN_CLASS)
   }
 
-  function resetCurrentLocaleBottomBorderRadius(currentLocale) {
+  function removeCurrentLocaleBottomBorderRadius(currentLocale) {
     currentLocale
       .classList
       .remove(TOP_BORDER_RADIUS_ONLY)
+  }
+
+  function addCurrentLocaleBottomBorderRadius(currentLocale) {
+    currentLocale
+      .classList
+      .add(TOP_BORDER_RADIUS_ONLY)
   }
 })()

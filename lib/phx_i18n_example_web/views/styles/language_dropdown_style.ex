@@ -12,13 +12,6 @@ defmodule PhxI18nExampleWeb.LanguageDropdownStyle do
     pointer
     tc
     w4
-  ]
-
-  @current_selection_border_radius_classes "br--top"
-
-  @current_selection_link_classes ~w[
-    no-underline
-    white
   ] |> Enum.join(" ")
 
   @dropdown_container_classes ~w[
@@ -31,6 +24,7 @@ defmodule PhxI18nExampleWeb.LanguageDropdownStyle do
     w-90
   ] |> Enum.join(" ")
 
+  # NOTE: Default visibility is `display: none` (`dn`).
   @dropdown_list_classes ~w[
     absolute
     b--white
@@ -39,6 +33,7 @@ defmodule PhxI18nExampleWeb.LanguageDropdownStyle do
     br
     br--bottom
     br2
+    dn
     items-center
     list
     mt5
@@ -49,19 +44,7 @@ defmodule PhxI18nExampleWeb.LanguageDropdownStyle do
     tc
     top-0
     w4
-  ]
-
-  @dropdown_show_classes ~w[
-    flex
-    flex-column
   ] |> Enum.join(" ")
-
-  @dropdown_hide_classes "dn"
-
-  @dropdown_visible_classes ~w[
-    flex
-    flex-column
-  ]
 
   @dropdown_list_item_classes ~w[
     hover-bg-white
@@ -70,12 +53,6 @@ defmodule PhxI18nExampleWeb.LanguageDropdownStyle do
     pv2
     pt0
     w-100
-  ] |> Enum.join(" ")
-
-  @dropdown_list_item_link_classes ~w[
-    no-underline
-    w-100
-    white
   ] |> Enum.join(" ")
 
   @main_classes ~w[
@@ -89,34 +66,13 @@ defmodule PhxI18nExampleWeb.LanguageDropdownStyle do
 
   def caret, do: @caret_classes
 
-  def current_selection(show_available_locales) do
-    display_classes =
-      if show_available_locales do
-        [@current_selection_border_radius_classes | @current_selection_classes]
-      else
-        @current_selection_classes
-      end
-
-    Enum.join(display_classes, " ")
-  end
-
-  def current_selection_link, do: @current_selection_link_classes
+  def current_selection, do: @current_selection_classes
 
   def dropdown_container, do: @dropdown_container_classes
 
-  def dropdown_list(show_available_locales) do
-    display_classes =
-      if show_available_locales do
-        [@dropdown_show_classes | @dropdown_list_classes]
-      else
-        [@dropdown_hide_classes | @dropdown_list_classes]
-      end
-
-    Enum.join(display_classes, " ")
-  end
+  def dropdown_list, do: @dropdown_list_classes
 
   def dropdown_list_item, do: @dropdown_list_item_classes
-  def dropdown_list_item_link, do: @dropdown_list_item_link_classes
 
   def main, do: @main_classes
 end

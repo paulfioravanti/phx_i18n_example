@@ -20,7 +20,6 @@ defmodule PhxI18nExampleWeb.LocalePlug do
         conn
         |> assign(:current_locale, locale)
         |> assign(:selectable_locales, List.delete(@locales, locale))
-        |> determine_language_dropdown_state()
         |> persist_locale(locale)
     end
   end
@@ -38,22 +37,6 @@ defmodule PhxI18nExampleWeb.LocalePlug do
   end
 
   defp locale_from_cookies(_conn), do: nil
-
-  defp determine_language_dropdown_state(conn) do
-    show_available_languages =
-      case conn.params["show_available_locales"] do
-        nil ->
-          false
-
-        "true" ->
-          true
-
-        "false" ->
-          false
-      end
-
-    assign(conn, :show_available_locales, show_available_languages)
-  end
 
   defp persist_locale(%Plug.Conn{cookies: %{@cookie => locale}} = conn, locale) do
     conn
