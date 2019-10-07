@@ -10,17 +10,28 @@ defmodule PhxI18nExampleWeb.LocalePlug do
   def init(_opts), do: nil
 
   def call(conn, _opts) do
+    locale = fetch_and_set_locale(conn)
+
+    conn
+    |> assign(:current_locale, locale)
+    |> assign(:selectable_locales, List.delete(@locales, locale))
+    |> persist_locale(locale)
+  end
+
+  defp fetch_and_set_locale(conn) do
     case locale_from_params(conn) || locale_from_cookies(conn) do
       nil ->
-        conn
+        # NOTE: This will fallback to the default locale set in `config.exs`
+        locale = Gettext.get_locale()
+        Gettext.put_locale(PhxI18nExampleWeb.Gettext, locale)
+        locale
 
       locale ->
-        Gettext.put_locale(PhxI18nExampleWeb.Gettext, locale)
+        if locale != Gettext.get_locale() do
+          Gettext.put_locale(PhxI18nExampleWeb.Gettext, locale)
+        end
 
-        conn
-        |> assign(:current_locale, locale)
-        |> assign(:selectable_locales, List.delete(@locales, locale))
-        |> persist_locale(locale)
+        locale
     end
   end
 
