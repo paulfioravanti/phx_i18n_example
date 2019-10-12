@@ -58,11 +58,6 @@ defmodule PhxI18nExampleWeb.LanguageDropdownStyle do
 
   @dropdown_hide_classes "dn"
 
-  @dropdown_visible_classes ~w[
-    flex
-    flex-column
-  ]
-
   @dropdown_list_item_classes ~w[
     hover-bg-white
     hover-dark-pink
