@@ -10,9 +10,8 @@
   </head>
   <body>
     <main role="main" class="<%= main() %>" id="main">
-      <%= render PhxI18nExampleWeb.LayoutView,
+      <%= render PhxI18nExampleWeb.LanguageDropdownView,
                  "language_dropdown.html",
-                 path: @conn.request_path,
                  current_locale: @current_locale,
                  selectable_locales: @selectable_locales %>
       <%= render @view_module, @view_template, assigns %>

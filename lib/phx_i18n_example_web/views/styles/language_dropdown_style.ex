@@ -55,15 +55,6 @@ defmodule PhxI18nExampleWeb.LanguageDropdownStyle do
     w-100
   ] |> Enum.join(" ")
 
-  @main_classes ~w[
-    bg-dark-pink
-    overflow-container
-    pt3
-    sans-serif
-    vh-100
-    white
-  ] |> Enum.join(" ")
-
   def caret, do: @caret_classes
 
   def current_selection, do: @current_selection_classes
@@ -73,6 +64,4 @@ defmodule PhxI18nExampleWeb.LanguageDropdownStyle do
   def dropdown_list, do: @dropdown_list_classes
 
   def dropdown_list_item, do: @dropdown_list_item_classes
-
-  def main, do: @main_classes
 end
