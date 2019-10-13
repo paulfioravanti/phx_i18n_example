@@ -37,11 +37,15 @@ document.getElementById("current_locale").onclick = event => {
 
 document.querySelectorAll("[role='selectable_locale']").forEach(locale => {
   locale.onclick = () => {
-    const xhr = new XMLHttpRequest()
-    xhr.open("GET", location.href + `?locale=${locale.id}`)
-    xhr.onreadystatechange = () => {
-      location.reload()
-    }
-    xhr.send()
+    changeLocale(locale)
   }
 })
+
+function changeLocale(locale) {
+  const xhr = new XMLHttpRequest()
+  xhr.open("GET", location.href + `?locale=${locale.id}`)
+  xhr.onreadystatechange = () => {
+    location.reload()
+  }
+  xhr.send()
+}
