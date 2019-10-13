@@ -58,11 +58,6 @@ defmodule PhxI18nExampleWeb.LanguageDropdownStyle do
 
   @dropdown_hide_classes "dn"
 
-  @dropdown_visible_classes ~w[
-    flex
-    flex-column
-  ]
-
   @dropdown_list_item_classes ~w[
     hover-bg-white
     hover-dark-pink
@@ -75,15 +70,6 @@ defmodule PhxI18nExampleWeb.LanguageDropdownStyle do
   @dropdown_list_item_link_classes ~w[
     no-underline
     w-100
-    white
-  ] |> Enum.join(" ")
-
-  @main_classes ~w[
-    bg-dark-pink
-    overflow-container
-    pt3
-    sans-serif
-    vh-100
     white
   ] |> Enum.join(" ")
 
@@ -117,6 +103,4 @@ defmodule PhxI18nExampleWeb.LanguageDropdownStyle do
 
   def dropdown_list_item, do: @dropdown_list_item_classes
   def dropdown_list_item_link, do: @dropdown_list_item_link_classes
-
-  def main, do: @main_classes
 end

@@ -10,7 +10,7 @@
   </head>
   <body>
     <main role="main" class="<%= main() %>" id="main">
-      <%= render PhxI18nExampleWeb.LayoutView,
+      <%= render PhxI18nExampleWeb.LanguageDropdownView,
                  "language_dropdown.html",
                  path: @conn.request_path,
                  current_locale: @current_locale,

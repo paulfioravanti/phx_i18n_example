@@ -1,5 +1,5 @@
 defmodule PhxI18nExampleWeb.LocalePlug do
-  import Plug.Conn, only: [assign: 3, put_resp_cookie: 4]
+  alias Plug.Conn
 
   @locales Gettext.known_locales(PhxI18nExampleWeb.Gettext)
   @cookie "phx-i18n-example-language"
@@ -13,8 +13,8 @@ defmodule PhxI18nExampleWeb.LocalePlug do
     locale = fetch_and_set_locale(conn)
 
     conn
-    |> assign(:current_locale, locale)
-    |> assign(:selectable_locales, List.delete(@locales, locale))
+    |> Conn.assign(:current_locale, locale)
+    |> Conn.assign(:selectable_locales, List.delete(@locales, locale))
     |> determine_language_dropdown_state()
     |> persist_locale(locale)
   end
@@ -63,14 +63,15 @@ defmodule PhxI18nExampleWeb.LocalePlug do
           false
       end
 
-    assign(conn, :show_available_locales, show_available_languages)
+    Conn.assign(conn, :show_available_locales, show_available_languages)
   end
 
   defp persist_locale(%Plug.Conn{cookies: %{@cookie => locale}} = conn, locale) do
+    # Cookie locale is the same as the current locale
     conn
   end
 
   defp persist_locale(conn, locale) do
-    put_resp_cookie(conn, @cookie, locale, max_age: @ten_days)
+    Conn.put_resp_cookie(conn, @cookie, locale, max_age: @ten_days)
   end
 end
