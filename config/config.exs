@@ -10,9 +10,13 @@ use Mix.Config
 # Configures the endpoint
 config :phx_i18n_example, PhxI18nExampleWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "/+Cm7PGBI5CGR5cLlXOaW4iJU2/zPNVtiQZdx5VfiPv8FHbqMLNvXTT+sm4B8by/",
+  secret_key_base:
+    "/+Cm7PGBI5CGR5cLlXOaW4iJU2/zPNVtiQZdx5VfiPv8FHbqMLNvXTT+sm4B8by/",
   render_errors: [view: PhxI18nExampleWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: PhxI18nExample.PubSub, adapter: Phoenix.PubSub.PG2]
+  pubsub: [name: PhxI18nExample.PubSub, adapter: Phoenix.PubSub.PG2],
+  live_view: [
+    signing_salt: "a0t6/lQRn3QE+Y9uso/yvHI1YIV+ITBs"
+  ]
 
 # Configures Elixir's Logger
 config :logger, :console,

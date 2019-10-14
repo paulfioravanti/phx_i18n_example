@@ -23,6 +23,7 @@ defmodule PhxI18nExampleWeb do
 
       import Plug.Conn
       import PhxI18nExampleWeb.Gettext
+      import Phoenix.LiveView.Controller
       alias PhxI18nExampleWeb.Router.Helpers, as: Routes
     end
   end
@@ -34,13 +35,26 @@ defmodule PhxI18nExampleWeb do
         namespace: PhxI18nExampleWeb
 
       # Import convenience functions from controllers
-      import Phoenix.Controller, only: [get_flash: 1, get_flash: 2, view_module: 1]
+      import Phoenix.Controller,
+        only: [get_flash: 1, get_flash: 2, view_module: 1]
 
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
       import PhxI18nExampleWeb.ErrorHelpers
       import PhxI18nExampleWeb.Gettext
+
+      import Phoenix.LiveView,
+        only: [
+          live_render: 2,
+          live_render: 3,
+          live_link: 1,
+          live_link: 2,
+          live_component: 2,
+          live_component: 3,
+          live_component: 4
+        ]
+
       alias PhxI18nExampleWeb.Router.Helpers, as: Routes
     end
   end
@@ -50,6 +64,7 @@ defmodule PhxI18nExampleWeb do
       use Phoenix.Router
       import Plug.Conn
       import Phoenix.Controller
+      import Phoenix.LiveView.Router
     end
   end
 
