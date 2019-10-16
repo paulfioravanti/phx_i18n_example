@@ -25,4 +25,6 @@ defmodule PhxI18nExampleWeb.TitleLive do
     socket = assign(socket, :current_locale, current_locale)
     {:noreply, socket}
   end
+
+  def handle_info(_msg, socket), do: {:noreply, socket}
 end
