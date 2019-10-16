@@ -5,7 +5,7 @@ defmodule PhxI18nExampleWeb.TitleLive do
 
   @topic "i18n-example"
 
-  def mount(%{current_locale: current_locale} = session, socket) do
+  def mount(%{current_locale: current_locale}, socket) do
     PhxI18nExampleWeb.Endpoint.subscribe(@topic)
     socket = assign(socket, current_locale: current_locale)
     {:ok, socket}
