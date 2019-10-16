@@ -1,7 +1,6 @@
 defmodule PhxI18nExampleWeb.TitleLive do
   use Phoenix.LiveView
   import PhxI18nExampleWeb.Gettext, only: [gettext: 1]
-  alias PhxI18nExampleWeb.{Endpoint, TitleView}
 
   @topic "i18n-example"
 
