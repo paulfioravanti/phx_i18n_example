@@ -27,12 +27,14 @@ defmodule PhxI18nExampleWeb.LocalePlug do
       nil ->
         # NOTE: This will fallback to the default locale set in `config.exs`
         locale = Gettext.get_locale()
-        Gettext.put_locale(PhxI18nExampleWeb.Gettext, locale)
+        # Gettext.put_locale(PhxI18nExampleWeb.Gettext, locale)
+        Gettext.put_locale(locale)
         locale
 
       locale ->
         if locale != Gettext.get_locale() do
-          Gettext.put_locale(PhxI18nExampleWeb.Gettext, locale)
+          # Gettext.put_locale(PhxI18nExampleWeb.Gettext, locale)
+          Gettext.put_locale(locale)
         end
 
         locale
