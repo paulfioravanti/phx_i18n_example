@@ -24,6 +24,4 @@ defmodule PhxI18nExampleWeb.PageLive do
     socket = assign(socket, :current_locale, current_locale)
     {:noreply, socket}
   end
-
-  defp assign_to_socket({key, value}, socket), do: assign(socket, key, value)
 end
