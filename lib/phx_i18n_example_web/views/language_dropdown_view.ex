@@ -21,11 +21,11 @@ defmodule PhxI18nExampleWeb.LanguageDropdownView do
 
   def locale_to_string(locale), do: @locale_strings[locale]
 
-  def current_locale_link(path, current_locale, show_available_locales) do
+  def current_locale_link(current_locale, show_available_locales) do
     # Toggle show/hide of available locales
     params = "?show_available_locales=#{!show_available_locales}"
 
-    link(to: path <> params, class: current_selection_link()) do
+    link(to: params, class: current_selection_link()) do
       content_tag(:p, class: current_selection(show_available_locales)) do
         [
           content_tag(:span, locale_to_string(current_locale)),
@@ -35,10 +35,10 @@ defmodule PhxI18nExampleWeb.LanguageDropdownView do
     end
   end
 
-  def locale_link(path, locale) do
+  def locale_link(locale) do
     params = "?locale=#{locale}"
 
-    link(to: path <> params, class: dropdown_list_item_link()) do
+    link(to: params, class: dropdown_list_item_link()) do
       content_tag(:li, locale_to_string(locale), class: dropdown_list_item())
     end
   end
