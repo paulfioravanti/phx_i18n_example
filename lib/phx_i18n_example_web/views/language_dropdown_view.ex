@@ -25,7 +25,7 @@ defmodule PhxI18nExampleWeb.LanguageDropdownView do
     # Toggle show/hide of available locales
     params = "?show_available_locales=#{!show_available_locales}"
 
-    link(to: params, class: current_selection_link()) do
+    link(to: params, class: current_selection_link(), "phx-click": "toggle") do
       content_tag(:p, class: current_selection(show_available_locales)) do
         [
           content_tag(:span, locale_to_string(current_locale)),

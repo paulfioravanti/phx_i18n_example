@@ -1,4 +1,4 @@
-<div class="<%= dropdown_container() %>">
+<div class="<%= dropdown_container() %>" phx-click="hide">
   <%= current_locale_link(@current_locale, @show_available_locales) %>
   <ul class="<%= dropdown_list(@show_available_locales) %>">
     <%= for locale <- @selectable_locales do %>
