@@ -3,7 +3,7 @@ defmodule PhxI18nExampleWeb.LocalePlug do
   @behaviour Plug
 
   @locales Gettext.known_locales(PhxI18nExampleWeb.Gettext)
-  @cookie "phx-i18n-example-language"
+  @cookie "phxi18nexamplelanguage"
   @ten_days 10 * 24 * 60 * 60
 
   defguard known_locale?(locale) when locale in @locales

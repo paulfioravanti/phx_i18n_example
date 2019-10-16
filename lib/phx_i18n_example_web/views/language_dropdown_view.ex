@@ -22,8 +22,10 @@ defmodule PhxI18nExampleWeb.LanguageDropdownView do
   def current_locale(current_locale, show_available_locales) do
     content_tag(:p,
       class: current_selection(show_available_locales),
-      id: "current_locale",
-      "phx-click": "toggle"
+      id: current_locale,
+      name: "current_locale",
+      "phx-click": "toggle",
+      "phx-hook": "currentLocale"
     ) do
       [
         content_tag(:span, locale_to_string(current_locale)),
