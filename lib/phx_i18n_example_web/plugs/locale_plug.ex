@@ -17,6 +17,7 @@ defmodule PhxI18nExampleWeb.LocalePlug do
 
     conn
     |> Conn.assign(:current_locale, locale)
+    |> Conn.put_session(:current_locale, locale)
     |> Conn.assign(:selectable_locales, List.delete(@locales, locale))
     |> determine_language_dropdown_state()
     |> persist_locale(locale)
