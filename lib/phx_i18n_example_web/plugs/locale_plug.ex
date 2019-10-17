@@ -14,11 +14,8 @@ defmodule PhxI18nExampleWeb.LocalePlug do
   @impl Plug
   def call(conn, _opts) do
     locale = fetch_and_set_locale(conn)
-    selectable_locales = List.delete(@locales, locale)
 
     conn
-    |> Conn.assign(:current_locale, locale)
-    |> Conn.assign(:selectable_locales, selectable_locales)
     |> determine_language_dropdown_state()
     |> persist_locale(locale)
   end
@@ -27,9 +24,7 @@ defmodule PhxI18nExampleWeb.LocalePlug do
     case locale_from_params(conn) || locale_from_cookies(conn) do
       nil ->
         # NOTE: This will fallback to the default locale set in `config.exs`
-        locale = Gettext.get_locale()
-        Gettext.put_locale(locale)
-        locale
+        Gettext.get_locale()
 
       locale ->
         if locale != Gettext.get_locale() do
@@ -57,13 +52,10 @@ defmodule PhxI18nExampleWeb.LocalePlug do
   defp determine_language_dropdown_state(conn) do
     show_available_languages =
       case conn.params["show_available_locales"] do
-        nil ->
-          false
-
         "true" ->
           true
 
-        "false" ->
+        _ ->
           false
       end
 

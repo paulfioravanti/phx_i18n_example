@@ -11,8 +11,6 @@
   <body class="<%= body() %>">
     <%= render PhxI18nExampleWeb.LanguageDropdownView,
                "language_dropdown.html",
-               current_locale: @current_locale,
-               selectable_locales: @selectable_locales,
                show_available_locales: @show_available_locales %>
     <main role="main">
       <%= render @view_module, @view_template, assigns %>
