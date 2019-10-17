@@ -40,7 +40,7 @@ defmodule PhxI18nExampleWeb.LanguageDropdownLive do
     {:noreply, socket}
   end
 
-  def handle_info(%{event: "hide"}, socket) do
+  def handle_info(%{event: "hide-dropdown"}, socket) do
     socket = assign(socket, :show_available_locales, false)
     {:noreply, socket}
   end

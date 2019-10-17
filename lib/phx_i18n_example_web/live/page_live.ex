@@ -14,8 +14,8 @@ defmodule PhxI18nExampleWeb.PageLive do
     PageView.render("index.html", assigns)
   end
 
-  def handle_event("hide", _value, socket) do
-    Endpoint.broadcast_from(self(), @topic, "hide", %{})
+  def handle_event("hide-dropdown", _value, socket) do
+    Endpoint.broadcast_from(self(), @topic, "hide-dropdown", %{})
     {:noreply, socket}
   end
 
