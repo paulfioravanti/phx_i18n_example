@@ -18,7 +18,7 @@ import "tachyons"
 // import socket from "./socket"
 import { LocaleDropdown } from "./locale_dropdown"
 
-document.getElementById("main").onclick = () => {
+document.getElementById("body").onclick = () => {
   const localeDropdown = document.getElementById("locale_dropdown")
   const currentLocale = document.getElementById("current_locale")
   const currentLocaleLink = document.getElementById("current_locale_link")
@@ -35,7 +35,7 @@ document.getElementById("main").onclick = () => {
 
 document.querySelectorAll('[role="locale_link"]').forEach(link => {
   link.onclick = event => {
-    // NOTE: Prevent propagation to the onclick handler for the `main` tag.
+    // NOTE: Prevent propagation to the onclick handler for the `body` tag.
     event.stopPropagation()
   }
 })
