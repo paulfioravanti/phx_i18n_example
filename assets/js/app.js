@@ -18,24 +18,26 @@ import "tachyons"
 // import socket from "./socket"
 import { LocaleDropdown } from "./locale_dropdown"
 
-document.getElementById("body").onclick = () => {
-  const localeDropdown = document.getElementById("locale_dropdown")
-  const currentLocale = document.getElementById("current_locale")
-  const currentLocaleLink = document.getElementById("current_locale_link")
+const BODY = document.getElementById("body")
+const LOCALE_DROPDOWN = document.getElementById("locale_dropdown")
+const CURRENT_LOCALE = document.getElementById("current_locale")
+const CURRENT_LOCALE_LINK = document.getElementById("current_locale_link")
+const LOCALE_DROPDOWN_LINKS =
+  document.querySelectorAll('[role="locale_link"], #current_locale')
 
-  LocaleDropdown.hide(localeDropdown, currentLocale, currentLocaleLink)
+LocaleDropdown.init(LOCALE_DROPDOWN_LINKS)
+
+BODY.onclick = () => {
+  LocaleDropdown.hide(LOCALE_DROPDOWN, CURRENT_LOCALE, CURRENT_LOCALE_LINK)
   // NOTE: This is done purely from a UX standpoint: If the locale dropdown is
   // closed, do not have the search parameter say that it's open.
-  if (window.location.search === "?show_available_locales=true") {
-    window
-      .history
-      .pushState({}, document.title, "/?show_available_locales=false")
-  }
+  updateShowAvailableLocalesToHidden()
 }
 
-document.querySelectorAll('[role="locale_link"]').forEach(link => {
-  link.onclick = event => {
-    // NOTE: Prevent propagation to the onclick handler for the `body` tag.
-    event.stopPropagation()
+function updateShowAvailableLocalesToHidden() {
+  if (window.location.search === "?show_available_locales=true") {
+    window.history.pushState(
+      {}, document.title, "/?show_available_locales=false"
+    )
   }
-})
+}

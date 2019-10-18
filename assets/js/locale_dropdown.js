@@ -7,7 +7,15 @@ const LocaleDropdown = (() => {
   const DROPDOWN_HIDDEN_CLASS = "dn"
 
   return {
+    init: init,
     hide: hide
+  }
+
+  function init(locale_dropdown_links) {
+    locale_dropdown_links.forEach(link => {
+      // NOTE: Prevent propagation to the onclick handler for the `body` tag.
+      link.onclick = event => { event.stopPropagation() }
+    })
   }
 
   function hide(localeDropdown, currentLocale, currentLocaleLink) {
