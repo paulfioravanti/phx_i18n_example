@@ -18,34 +18,6 @@ import "tachyons"
 // import socket from "./socket"
 import { LocaleDropdown } from "./locale_dropdown"
 
-const localeDropdown = document.getElementById("locale_dropdown")
-const currentLocale = document.getElementById("current_locale")
-
 document.getElementById("body").onclick = () => {
-  LocaleDropdown.hide(localeDropdown, currentLocale)
-}
-
-document.getElementById("current_locale").onclick = event => {
-  // NOTE: Prevent propagation to the onclick handler for the `main` tag.
-  event.stopPropagation()
-  if (LocaleDropdown.isVisible(localeDropdown)) {
-    LocaleDropdown.hide(localeDropdown, currentLocale)
-  } else {
-    LocaleDropdown.show(localeDropdown, currentLocale)
-  }
-}
-
-document.querySelectorAll("[role='selectable_locale']").forEach(locale => {
-  locale.onclick = () => {
-    changeLocale(locale)
-  }
-})
-
-function changeLocale(locale) {
-  const xhr = new XMLHttpRequest()
-  xhr.open("GET", location.href + `?locale=${locale.id}`)
-  xhr.onreadystatechange = () => {
-    location.reload()
-  }
-  xhr.send()
+  LocaleDropdown.hide()
 }
