@@ -1,8 +1,12 @@
 <div class="<%= dropdown_container() %>" phx-click="hide">
-  <%= current_locale(@locale, @show_available_locales) %>
+  <%= render LanguageDropdownView,
+             "_current_locale.html",
+             locale: @locale,
+             show_available_locales: @show_available_locales %>
   <ul class="<%= dropdown_list(@show_available_locales) %>">
-    <%= for locale <- @selectable_locales do %>
-      <%= locale_list_item(locale) %>
-    <% end %>
+    <%= render_many @selectable_locales,
+                    LanguageDropdownView,
+                    "_locale_list_item.html",
+                    as: :locale %>
   </ul>
 </div>

@@ -5,7 +5,7 @@ defmodule PhxI18nExampleWeb.PageLive do
   @topic "i18n-example"
 
   def mount(%{locale: locale}, socket) do
-    PhxI18nExampleWeb.Endpoint.subscribe(@topic)
+    Endpoint.subscribe(@topic)
     socket = assign(socket, locale: locale)
     {:ok, socket}
   end

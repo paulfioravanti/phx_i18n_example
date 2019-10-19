@@ -6,7 +6,7 @@ defmodule PhxI18nExampleWeb.LanguageDropdownLive do
   @topic "i18n-example"
 
   def mount(%{locale: locale}, socket) do
-    PhxI18nExampleWeb.Endpoint.subscribe(@topic)
+    Endpoint.subscribe(@topic)
     socket = init_socket_assigns(socket, locale)
 
     {:ok, socket}
