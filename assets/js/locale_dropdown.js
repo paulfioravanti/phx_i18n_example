@@ -1,7 +1,8 @@
 export { LocaleDropdown }
 
-const LocaleDropdown = (document => {
-  const LOCALE_DROPDOWN = document.getElementById("locale_dropdown")
+const LocaleDropdown = ((document, window) => {
+  const LOCALE_DROPDOWN_CLASSES =
+    document.getElementById("locale_dropdown").classList
   const CURRENT_LOCALE = document.getElementById("current_locale")
   const SELECTABLE_LOCALES =
     document.querySelectorAll("[role='selectable_locale']")
@@ -18,25 +19,23 @@ const LocaleDropdown = (document => {
   })
 
   function hide() {
-    const localeDropdownClassList = LOCALE_DROPDOWN.classList
     const currentLocaleClassList = CURRENT_LOCALE.classList
-    if (isVisible(localeDropdownClassList)) {
-      hideLocaleDropdown(localeDropdownClassList)
+    if (isVisible()) {
+      hideLocaleDropdown()
       removeCurrentLocaleBottomBorderRadius(currentLocaleClassList)
     }
   }
 
   function initCurrentLocale() {
-    const localeDropdownClassList = LOCALE_DROPDOWN.classList
     const currentLocaleClassList = CURRENT_LOCALE.classList
     CURRENT_LOCALE.onclick = event => {
       // NOTE: Prevent propagation to the onclick handler for the `body` tag.
       event.stopPropagation()
-      if (isVisible(localeDropdownClassList)) {
-        hideLocaleDropdown(localeDropdownClassList)
+      if (isVisible()) {
+        hideLocaleDropdown()
         removeCurrentLocaleBottomBorderRadius(currentLocaleClassList)
       } else {
-        showLocaleDropdown(localeDropdownClassList)
+        showLocaleDropdown()
         addCurrentLocaleBottomBorderRadius(currentLocaleClassList)
       }
     }
@@ -51,30 +50,32 @@ const LocaleDropdown = (document => {
   }
 
   function changeLocale(locale) {
+    // Clear params in case the locale was originally set using them.
+    window.history.replaceState({}, document.title, "/")
     const xhr = new XMLHttpRequest()
-    xhr.open("GET", document.location.href + `?locale=${locale.id}`)
+    xhr.open("GET", document.location.origin + `?locale=${locale.id}`)
     xhr.onreadystatechange = () => {
       document.location.reload()
     }
     xhr.send()
   }
 
-  function isVisible(localeDropdownClassList) {
+  function isVisible() {
     return (
       DROPDOWN_VISIBLE_CLASSES.some(value => {
-        return localeDropdownClassList.contains(value)
+        return LOCALE_DROPDOWN_CLASSES.contains(value)
       })
     )
   }
 
-  function hideLocaleDropdown(localeDropdownClassList) {
-    localeDropdownClassList.remove(...DROPDOWN_VISIBLE_CLASSES)
-    localeDropdownClassList.add(DROPDOWN_HIDDEN_CLASS)
+  function hideLocaleDropdown() {
+    LOCALE_DROPDOWN_CLASSES.remove(...DROPDOWN_VISIBLE_CLASSES)
+    LOCALE_DROPDOWN_CLASSES.add(DROPDOWN_HIDDEN_CLASS)
   }
 
-  function showLocaleDropdown(localeDropdownClassList) {
-    localeDropdownClassList.add(...DROPDOWN_VISIBLE_CLASSES)
-    localeDropdownClassList.remove(DROPDOWN_HIDDEN_CLASS)
+  function showLocaleDropdown() {
+    LOCALE_DROPDOWN_CLASSES.add(...DROPDOWN_VISIBLE_CLASSES)
+    LOCALE_DROPDOWN_CLASSES.remove(DROPDOWN_HIDDEN_CLASS)
   }
 
   function removeCurrentLocaleBottomBorderRadius(currentLocaleClassList) {
@@ -84,4 +85,4 @@ const LocaleDropdown = (document => {
   function addCurrentLocaleBottomBorderRadius(currentLocaleClassList) {
     currentLocaleClassList.add(TOP_BORDER_RADIUS_ONLY)
   }
-})(document)
+})(document, window)
