@@ -1,51 +1,57 @@
 export { LocaleDropdown }
 
-const LocaleDropdown = (() => {
+const LocaleDropdown = (document => {
+  const LOCALE_DROPDOWN_CLASSES =
+    document.getElementById("locale_dropdown").classList
+  const CURRENT_LOCALE_CLASSES =
+    document.getElementById("current_locale").classList
+  const CURRENT_LOCALE_LINK = document.getElementById("current_locale_link")
+  const LOCALE_DROPDOWN_LINKS =
+    document.querySelectorAll('[role="locale_link"], #current_locale_link')
   // REF: https://tachyons.io/docs/table-of-styles/
   const TOP_BORDER_RADIUS_ONLY = "br--top"
   const DROPDOWN_VISIBLE_CLASSES = ["flex", "flex-column"]
   const DROPDOWN_HIDDEN_CLASS = "dn"
 
-  return {
-    init: init,
-    hide: hide
-  }
+  initLocaleDropdownLinks()
 
-  function init(localeDropdownLinks) {
-    localeDropdownLinks.forEach(link => {
+  return Object.freeze({
+    hide: hide
+  })
+
+  function initLocaleDropdownLinks() {
+    LOCALE_DROPDOWN_LINKS.forEach(link => {
       // NOTE: Prevent propagation to the onclick handler for the `body` tag.
       link.onclick = event => { event.stopPropagation() }
     })
   }
 
-  function hide(localeDropdown, currentLocale, currentLocaleLink) {
-    const dropdownClassList = localeDropdown.classList
-
-    if (isVisible(dropdownClassList)) {
-      hideLocaleDropdown(dropdownClassList)
-      setCurrentLocaleLinkToOpenDropdownMenu(currentLocaleLink)
-      resetCurrentLocaleBottomBorderRadius(currentLocale)
+  function hide() {
+    if (isVisible()) {
+      hideLocaleDropdown()
+      setCurrentLocaleLinkToOpenDropdownMenu()
+      resetCurrentLocaleBottomBorderRadius()
     }
   }
 
-  function isVisible(dropdownClassList) {
+  function isVisible() {
     return (
       DROPDOWN_VISIBLE_CLASSES.some(value => {
-        return dropdownClassList.contains(value)
+        return LOCALE_DROPDOWN_CLASSES.contains(value)
       })
     )
   }
 
-  function hideLocaleDropdown(dropdownClassList) {
-    dropdownClassList.remove(...DROPDOWN_VISIBLE_CLASSES)
-    dropdownClassList.add(DROPDOWN_HIDDEN_CLASS)
+  function hideLocaleDropdown() {
+    LOCALE_DROPDOWN_CLASSES.remove(...DROPDOWN_VISIBLE_CLASSES)
+    LOCALE_DROPDOWN_CLASSES.add(DROPDOWN_HIDDEN_CLASS)
   }
 
-  function setCurrentLocaleLinkToOpenDropdownMenu(currentLocaleLink) {
-    currentLocaleLink.setAttribute("href", "/?show_available_locales=true")
+  function setCurrentLocaleLinkToOpenDropdownMenu() {
+    CURRENT_LOCALE_LINK.setAttribute("href", "/?show_available_locales=true")
   }
 
-  function resetCurrentLocaleBottomBorderRadius(currentLocale) {
-    currentLocale.classList.remove(TOP_BORDER_RADIUS_ONLY)
+  function resetCurrentLocaleBottomBorderRadius() {
+    CURRENT_LOCALE_CLASSES.remove(TOP_BORDER_RADIUS_ONLY)
   }
-})()
+})(document)
