@@ -11,8 +11,8 @@ const LocaleDropdown = (() => {
     hide: hide
   }
 
-  function init(locale_dropdown_links) {
-    locale_dropdown_links.forEach(link => {
+  function init(localeDropdownLinks) {
+    localeDropdownLinks.forEach(link => {
       // NOTE: Prevent propagation to the onclick handler for the `body` tag.
       link.onclick = event => { event.stopPropagation() }
     })
