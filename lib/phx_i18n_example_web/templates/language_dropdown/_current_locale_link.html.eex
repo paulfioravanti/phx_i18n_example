@@ -1,0 +1,9 @@
+<a href="?show_available_locales=<%= !@show_available_locales %>"
+   class="<%= current_selection_link() %>"
+   id="current_locale_link">
+  <p class="<%= current_selection(@show_available_locales) %>"
+     id="current_locale">
+    <span><%= current_locale_string() %></span>
+    <span class="<%= caret() %>">▾</span>
+  </p>
+</a>

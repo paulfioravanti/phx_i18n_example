@@ -23,7 +23,7 @@ const LOCALE_DROPDOWN = document.getElementById("locale_dropdown")
 const CURRENT_LOCALE = document.getElementById("current_locale")
 const CURRENT_LOCALE_LINK = document.getElementById("current_locale_link")
 const LOCALE_DROPDOWN_LINKS =
-  document.querySelectorAll('[role="locale_link"], #current_locale')
+  document.querySelectorAll('[role="locale_link"], #current_locale_link')
 
 LocaleDropdown.init(LOCALE_DROPDOWN_LINKS)
 
