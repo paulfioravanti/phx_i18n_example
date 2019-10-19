@@ -1,6 +1,6 @@
 export { Cookie }
 
-const Cookie = (() => {
+const Cookie = (document => {
   const NAME = "phxi18nexamplelanguage"
 
   return { set: set }
@@ -15,4 +15,4 @@ const Cookie = (() => {
     expiry.setDate(expiry.getDate() + 10)
     return expiry.toGMTString()
   }
-})()
+})(document)

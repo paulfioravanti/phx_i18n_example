@@ -16,7 +16,7 @@ import { Socket } from "phoenix"
 import LiveSocket from "phoenix_live_view"
 import { Cookie } from "./cookie"
 
-const HOOKS = {
+const Hooks = {
   currentLocale: {
     mounted() {
       Cookie.set(this.el.id)
@@ -24,7 +24,7 @@ const HOOKS = {
   }
 }
 
-let liveSocket = new LiveSocket("/live", Socket, { hooks: HOOKS })
+let liveSocket = new LiveSocket("/live", Socket, { hooks: Hooks })
 liveSocket.connect()
 
 // Import local files
