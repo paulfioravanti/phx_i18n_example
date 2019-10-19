@@ -1,5 +1,5 @@
 defmodule PhxI18nExampleWeb.LayoutStyle do
-  @main_classes ~w[
+  @body_classes ~w[
     bg-dark-pink
     overflow-container
     pt3
@@ -8,5 +8,5 @@ defmodule PhxI18nExampleWeb.LayoutStyle do
     white
   ] |> Enum.join(" ")
 
-  def main, do: @main_classes
+  def body, do: @body_classes
 end

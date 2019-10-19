@@ -49,14 +49,10 @@ const LocaleDropdown = (() => {
   }
 
   function removeCurrentLocaleBottomBorderRadius(currentLocale) {
-    currentLocale
-      .classList
-      .remove(TOP_BORDER_RADIUS_ONLY)
+    currentLocale.classList.remove(TOP_BORDER_RADIUS_ONLY)
   }
 
   function addCurrentLocaleBottomBorderRadius(currentLocale) {
-    currentLocale
-      .classList
-      .add(TOP_BORDER_RADIUS_ONLY)
+    currentLocale.classList.add(TOP_BORDER_RADIUS_ONLY)
   }
 })()

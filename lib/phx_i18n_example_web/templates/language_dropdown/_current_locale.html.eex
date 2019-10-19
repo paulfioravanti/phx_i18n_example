@@ -1,0 +1,5 @@
+<p class="<%= current_selection() %>"
+   id="current_locale">
+  <span><%= current_locale_string() %></span>
+  <span class="<%= caret() %>">▾</span>
+</p>

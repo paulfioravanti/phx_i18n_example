@@ -21,7 +21,7 @@ import { LocaleDropdown } from "./locale_dropdown"
 const localeDropdown = document.getElementById("locale_dropdown")
 const currentLocale = document.getElementById("current_locale")
 
-document.getElementById("main").onclick = () => {
+document.getElementById("body").onclick = () => {
   LocaleDropdown.hide(localeDropdown, currentLocale)
 }
 

@@ -3,7 +3,7 @@ defmodule PhxI18nExampleWeb.LocalePlug do
   @behaviour Plug
 
   @locales Gettext.known_locales(PhxI18nExampleWeb.Gettext)
-  @cookie "phx-i18n-example-language"
+  @cookie "phxi18nexamplelanguage"
   @ten_days 10 * 24 * 60 * 60
 
   defguard known_locale?(locale) when locale in @locales
@@ -14,24 +14,18 @@ defmodule PhxI18nExampleWeb.LocalePlug do
   @impl Plug
   def call(conn, _opts) do
     locale = fetch_and_set_locale(conn)
-
-    conn
-    |> Conn.assign(:current_locale, locale)
-    |> Conn.assign(:selectable_locales, List.delete(@locales, locale))
-    |> persist_locale(locale)
+    persist_locale(conn, locale)
   end
 
   defp fetch_and_set_locale(conn) do
     case locale_from_params(conn) || locale_from_cookies(conn) do
       nil ->
         # NOTE: This will fallback to the default locale set in `config.exs`
-        locale = Gettext.get_locale()
-        Gettext.put_locale(PhxI18nExampleWeb.Gettext, locale)
-        locale
+        Gettext.get_locale()
 
       locale ->
         if locale != Gettext.get_locale() do
-          Gettext.put_locale(PhxI18nExampleWeb.Gettext, locale)
+          Gettext.put_locale(locale)
         end
 
         locale

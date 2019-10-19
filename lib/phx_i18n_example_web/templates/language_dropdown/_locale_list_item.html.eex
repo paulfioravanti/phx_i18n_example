@@ -1,0 +1,5 @@
+<li class="<%= dropdown_list_item() %>"
+    id="<%= @locale %>"
+    role="selectable_locale">
+  <%= locale_string(@locale) %>
+</li>

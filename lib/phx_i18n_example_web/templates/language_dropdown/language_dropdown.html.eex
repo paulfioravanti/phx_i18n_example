@@ -1,8 +1,9 @@
 <div class="<%= dropdown_container() %>">
-  <%= current_locale(@current_locale) %>
+  <%= render LanguageDropdownView, "_current_locale.html" %>
   <ul class="<%= dropdown_list() %>" id="locale_dropdown">
-    <%= for locale <- @selectable_locales do %>
-      <%= locale_list_item(locale) %>
-    <% end %>
+    <%= render_many selectable_locales(),
+                    LanguageDropdownView,
+                    "_locale_list_item.html",
+                    as: :locale %>
   </ul>
 </div>
