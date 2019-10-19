@@ -1,0 +1,5 @@
+<a href="?locale=<%= @locale %>" class="<%= dropdown_list_item_link() %>">
+  <li class="<%= dropdown_list_item() %>">
+    <%= locale_string(@locale) %>
+  </li>
+</a>
