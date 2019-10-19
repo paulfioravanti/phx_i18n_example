@@ -4,16 +4,12 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <%= live_render @conn,
-                    TitleLive,
-                    session: %{ current_locale: @current_locale } %>
+    <%= live_render @conn, TitleLive, session: %{locale: @locale} %>
     <link rel="stylesheet"
           href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
   </head>
   <body class="<%= body() %>">
-    <%= live_render @conn,
-                    LanguageDropdownLive,
-                    session: %{ current_locale: @current_locale } %>
+    <%= live_render @conn, LanguageDropdownLive, session: %{locale: @locale} %>
     <main role="main">
       <%= render @view_module, @view_template, assigns %>
     </main>

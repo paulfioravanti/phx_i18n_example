@@ -1,7 +1,7 @@
 <article class="<%= article() %>" phx-click="hide-dropdown">
   <div class="<%= heading_container() %>">
     <h1 class="<%= heading() %>">
-      <%= Gettext.with_locale(@current_locale, fn -> %>
+      <%= Gettext.with_locale(@locale, fn -> %>
         <%= gettext("Vertically centering things in css is easy!") %>
       <% end) %>
     </h1>

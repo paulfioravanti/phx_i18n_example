@@ -18,7 +18,7 @@ defmodule PhxI18nExampleWeb.Router do
 
   scope "/", PhxI18nExampleWeb do
     pipe_through :browser
-    live "/", PageLive, session: [:current_locale]
+    live "/", PageLive, session: [:locale]
   end
 
   # Other scopes may use custom stacks.

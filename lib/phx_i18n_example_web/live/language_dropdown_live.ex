@@ -5,9 +5,9 @@ defmodule PhxI18nExampleWeb.LanguageDropdownLive do
   @locales Gettext.known_locales(PhxI18nExampleWeb.Gettext)
   @topic "i18n-example"
 
-  def mount(%{current_locale: current_locale}, socket) do
+  def mount(%{locale: locale}, socket) do
     PhxI18nExampleWeb.Endpoint.subscribe(@topic)
-    socket = init_socket_assigns(socket, current_locale)
+    socket = init_socket_assigns(socket, locale)
 
     {:ok, socket}
   end
@@ -28,12 +28,7 @@ defmodule PhxI18nExampleWeb.LanguageDropdownLive do
   end
 
   def handle_event("change-locale", %{"locale" => locale}, socket) do
-    Endpoint.broadcast_from(
-      self(),
-      @topic,
-      "locale-changed",
-      %{current_locale: locale}
-    )
+    Endpoint.broadcast_from(self(), @topic, "locale-changed", %{locale: locale})
 
     socket = init_socket_assigns(socket, locale)
 
@@ -51,7 +46,7 @@ defmodule PhxI18nExampleWeb.LanguageDropdownLive do
     assign(
       socket,
       %{
-        current_locale: locale,
+        locale: locale,
         selectable_locales: selectable_locales,
         show_available_locales: false
       }
