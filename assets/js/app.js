@@ -20,15 +20,5 @@ import { LocaleDropdown } from "./locale_dropdown"
 
 document.getElementById("body").onclick = () => {
   LocaleDropdown.hide()
-  // NOTE: This is done purely from a UX standpoint: If the locale dropdown is
-  // closed, do not have the search parameter say that it's open.
-  updateShowAvailableLocalesToHidden()
 }
 
-function updateShowAvailableLocalesToHidden() {
-  if (window.location.search === "?show_available_locales=true") {
-    window.history.pushState(
-      {}, document.title, "/?show_available_locales=false"
-    )
-  }
-}

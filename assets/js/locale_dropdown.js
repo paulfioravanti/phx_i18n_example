@@ -1,6 +1,6 @@
 export { LocaleDropdown }
 
-const LocaleDropdown = (document => {
+const LocaleDropdown = ((document, window) => {
   const LOCALE_DROPDOWN_CLASSES =
     document.getElementById("locale_dropdown").classList
   const CURRENT_LOCALE_CLASSES =
@@ -31,6 +31,7 @@ const LocaleDropdown = (document => {
       hideLocaleDropdown()
       setCurrentLocaleLinkToOpenDropdownMenu()
       resetCurrentLocaleBottomBorderRadius()
+      updateShowAvailableLocalesToHidden()
     }
   }
 
@@ -54,4 +55,14 @@ const LocaleDropdown = (document => {
   function resetCurrentLocaleBottomBorderRadius() {
     CURRENT_LOCALE_CLASSES.remove(TOP_BORDER_RADIUS_ONLY)
   }
-})(document)
+
+  function updateShowAvailableLocalesToHidden() {
+    // NOTE: This is done purely from a UX standpoint: If the locale dropdown is
+    // closed, do not have the search parameter say that it's open.
+    if (window.location.search === "?show_available_locales=true") {
+      window.history.pushState(
+        {}, document.title, "/?show_available_locales=false"
+      )
+    }
+  }
+})(document, window)
