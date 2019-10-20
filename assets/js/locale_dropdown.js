@@ -55,7 +55,9 @@ const LocaleDropdown = ((document, window) => {
     const xhr = new XMLHttpRequest()
     xhr.open("GET", document.location.origin + `?locale=${locale.id}`)
     xhr.onreadystatechange = () => {
-      document.location.reload()
+      document.open()
+      document.write(xhr.responseText)
+      document.close()
     }
     xhr.send()
   }
