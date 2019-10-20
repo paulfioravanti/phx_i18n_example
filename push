@@ -1,0 +1,2 @@
+git push origin 02-javascript-sprinkles
+git push heroku-02-js-sprinkles 02-javascript-sprinkles:master
