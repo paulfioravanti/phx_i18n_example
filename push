@@ -1,2 +1,2 @@
-git push origin 04-liveview
-git push heroku-04-liveview 04-liveview:master
+git push
+git push heroku master
