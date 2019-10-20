@@ -9,7 +9,7 @@
           href="<%= Routes.static_path(@conn, "/css/app.css") %>" />
   </head>
   <body class="<%= body() %>" id="body">
-    <%= render PhxI18nExampleWeb.LanguageDropdownView,
+    <%= render LanguageDropdownView,
                "language_dropdown.html",
                show_available_locales: @show_available_locales %>
     <main role="main">
