@@ -19,9 +19,4 @@ defmodule PhxI18nExampleWeb.Router do
     pipe_through :browser
     get "/", PageController, :index
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", PhxI18nExampleWeb do
-  #   pipe_through :api
-  # end
 end
