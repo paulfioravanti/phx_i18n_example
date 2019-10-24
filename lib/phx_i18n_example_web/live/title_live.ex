@@ -13,11 +13,11 @@ defmodule PhxI18nExampleWeb.TitleLive do
 
   def render(assigns) do
     ~L"""
-    <title>
-      <%= Gettext.with_locale(@locale, fn -> %>
+    <%= Gettext.with_locale(@locale, fn -> %>
+      <title>
         <%= gettext("Multilingualisation in Phoenix") %>
-      <% end) %>
-    </title>
+      </title>
+    <% end) %>
     """
   end
 
