@@ -21,4 +21,3 @@ import { LocaleDropdown } from "./locale_dropdown"
 document.getElementById("body").onclick = () => {
   LocaleDropdown.hide()
 }
-
