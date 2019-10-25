@@ -13,7 +13,7 @@ defmodule PhxI18nExampleWeb.PageStyle do
   ] |> Enum.join(" ")
 
   @heading_classes ~w[
-    f6 f2m f-subheadline-l
+    f6 f2-m f-subheadline-l
     fw6
     tc
   ] |> Enum.join(" ")
