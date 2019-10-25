@@ -20,7 +20,7 @@ defmodule PhxI18nExampleWeb.PageLive do
     {:noreply, socket}
   end
 
-  def handle_info(%{event: "locale-changed", payload: payload}, socket) do
+  def handle_info(%{event: "change-locale", payload: payload}, socket) do
     %{locale: locale} = payload
     socket = assign(socket, :locale, locale)
     {:noreply, socket}

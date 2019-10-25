@@ -27,8 +27,8 @@ defmodule PhxI18nExampleWeb.LanguageDropdownLive do
     {:noreply, socket}
   end
 
-  def handle_event("change-locale", %{"locale" => locale}, socket) do
-    Endpoint.broadcast_from(self(), @locale_changes, "locale-changed", %{
+  def handle_event("locale-changed", %{"locale" => locale}, socket) do
+    Endpoint.broadcast_from(self(), @locale_changes, "change-locale", %{
       locale: locale
     })
 
