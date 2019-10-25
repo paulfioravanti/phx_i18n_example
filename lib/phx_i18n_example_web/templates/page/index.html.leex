@@ -1,4 +1,4 @@
-<%= Gettext.with_locale(@locale, fn -> %>
+<%= with_locale(@locale, fn -> %>
   <article class="<%= article() %>" phx-click="hide-dropdown">
     <div class="<%= heading_container() %>">
       <h1 class="<%= heading() %>">

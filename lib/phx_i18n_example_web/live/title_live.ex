@@ -1,6 +1,7 @@
 defmodule PhxI18nExampleWeb.TitleLive do
   use Phoenix.LiveView
   import PhxI18nExampleWeb.Gettext, only: [gettext: 1]
+  import Gettext, only: [with_locale: 2]
   alias PhxI18nExampleWeb.Endpoint
 
   @topic "i18n-example"
@@ -13,7 +14,7 @@ defmodule PhxI18nExampleWeb.TitleLive do
 
   def render(assigns) do
     ~L"""
-    <%= Gettext.with_locale(@locale, fn -> %>
+    <%= with_locale(@locale, fn -> %>
       <title>
         <%= gettext("Multilingualisation in Phoenix") %>
       </title>
