@@ -4,10 +4,10 @@ defmodule PhxI18nExampleWeb.TitleLive do
   import Gettext, only: [with_locale: 2]
   alias PhxI18nExampleWeb.Endpoint
 
-  @topic "i18n-example"
+  @locale_changes "locale-changes"
 
   def mount(%{locale: locale}, socket) do
-    Endpoint.subscribe(@topic)
+    Endpoint.subscribe(@locale_changes)
     socket = assign(socket, locale: locale)
     {:ok, socket}
   end
@@ -27,6 +27,4 @@ defmodule PhxI18nExampleWeb.TitleLive do
     socket = assign(socket, :locale, locale)
     {:noreply, socket}
   end
-
-  def handle_info(_msg, socket), do: {:noreply, socket}
 end
