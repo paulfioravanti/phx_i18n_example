@@ -2,10 +2,11 @@ defmodule PhxI18nExampleWeb.PageLive do
   use Phoenix.LiveView
   alias PhxI18nExampleWeb.{Endpoint, PageView}
 
-  @topic "i18n-example"
+  @locale_changes "locale-changes"
+  @dropdown_changes "dropdown-changes"
 
   def mount(%{locale: locale}, socket) do
-    Endpoint.subscribe(@topic)
+    Endpoint.subscribe(@locale_changes)
     socket = assign(socket, locale: locale)
     {:ok, socket}
   end
@@ -15,11 +16,11 @@ defmodule PhxI18nExampleWeb.PageLive do
   end
 
   def handle_event("hide-dropdown", _value, socket) do
-    Endpoint.broadcast_from(self(), @topic, "hide-dropdown", %{})
+    Endpoint.broadcast_from(self(), @dropdown_changes, "hide-dropdown", %{})
     {:noreply, socket}
   end
 
-  def handle_info(%{event: "locale-changed", payload: payload}, socket) do
+  def handle_info(%{event: "change-locale", payload: payload}, socket) do
     %{locale: locale} = payload
     socket = assign(socket, :locale, locale)
     {:noreply, socket}

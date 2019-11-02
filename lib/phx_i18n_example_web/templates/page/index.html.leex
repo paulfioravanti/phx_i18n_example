@@ -1,9 +1,9 @@
-<article class="<%= article() %>" phx-click="hide-dropdown">
-  <div class="<%= heading_container() %>">
-    <h1 class="<%= heading() %>">
-      <%= Gettext.with_locale(@locale, fn -> %>
+<%= with_locale(@locale, fn -> %>
+  <article class="<%= article() %>" phx-click="hide-dropdown">
+    <div class="<%= heading_container() %>">
+      <h1 class="<%= heading() %>">
         <%= gettext("Vertically centering things in css is easy!") %>
-      <% end) %>
-    </h1>
-  </div>
-</article>
+      </h1>
+    </div>
+  </article>
+<% end) %>
