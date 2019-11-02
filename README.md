@@ -31,7 +31,7 @@ Open <http://localhost:4000>
 
 [Elm]: http://elm-lang.org/
 [Elm I18n Example]: https://github.com/paulfioravanti/elm-i18n-example
-[Internationalisation with Phoenix LiveView]: #
+[Internationalisation with Phoenix LiveView]: https://paulfioravanti.com/blog/2018/05/11/runtime-language-switching-in-elm/
 [Full Screen Centered Title component documentation page]: http://tachyons.io/components/layout/full-screen-centered-title/index.html
 [Phoenix]: https://phoenixframework.org/
 [Phoenix LiveView]: https://hexdocs.pm/phoenix_live_view/Phoenix.LiveView.html#content
