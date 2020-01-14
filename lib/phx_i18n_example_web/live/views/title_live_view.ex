@@ -1,4 +1,4 @@
-defmodule PhxI18nExampleWeb.TitleLive do
+defmodule PhxI18nExampleWeb.TitleLiveView do
   use Phoenix.LiveView
   import PhxI18nExampleWeb.Gettext, only: [gettext: 1]
   import Gettext, only: [with_locale: 2]

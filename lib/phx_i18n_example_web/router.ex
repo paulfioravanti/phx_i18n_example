@@ -18,6 +18,6 @@ defmodule PhxI18nExampleWeb.Router do
 
   scope "/", PhxI18nExampleWeb do
     pipe_through :browser
-    live "/", PageLive, session: [:locale]
+    live "/", PageLiveView, session: [:locale]
   end
 end

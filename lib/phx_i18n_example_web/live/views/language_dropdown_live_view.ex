@@ -1,4 +1,4 @@
-defmodule PhxI18nExampleWeb.LanguageDropdownLive do
+defmodule PhxI18nExampleWeb.LanguageDropdownLiveView do
   use Phoenix.LiveView
   alias PhxI18nExampleWeb.{Endpoint, LanguageDropdownView}
 

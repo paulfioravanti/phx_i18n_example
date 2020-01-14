@@ -1,6 +1,6 @@
 defmodule PhxI18nExampleWeb.LayoutView do
   use PhxI18nExampleWeb, :view
-  alias PhxI18nExampleWeb.{LanguageDropdownLive, LayoutStyle, TitleLive}
+  alias PhxI18nExampleWeb.{LanguageDropdownLiveView, LayoutStyle, TitleLiveView}
 
   defdelegate body, to: LayoutStyle
 end

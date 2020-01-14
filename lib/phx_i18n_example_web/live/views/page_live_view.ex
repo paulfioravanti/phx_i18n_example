@@ -1,4 +1,4 @@
-defmodule PhxI18nExampleWeb.PageLive do
+defmodule PhxI18nExampleWeb.PageLiveView do
   use Phoenix.LiveView
   alias PhxI18nExampleWeb.{Endpoint, PageView}
 
