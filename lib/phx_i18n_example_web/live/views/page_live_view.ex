@@ -1,6 +1,6 @@
 defmodule PhxI18nExampleWeb.PageLiveView do
   use Phoenix.LiveView
-  alias PhxI18nExampleWeb.{Endpoint, PageView}
+  alias PhxI18nExampleWeb.{Endpoint, PageLiveComponent}
 
   @locale_changes "locale-changes"
   @dropdown_changes "dropdown-changes"
@@ -12,7 +12,9 @@ defmodule PhxI18nExampleWeb.PageLiveView do
   end
 
   def render(assigns) do
-    PageView.render("index.html", assigns)
+    ~L"""
+    <%= live_component @socket, PageLiveComponent, locale: @locale %>
+    """
   end
 
   def handle_event("hide-dropdown", _value, socket) do
