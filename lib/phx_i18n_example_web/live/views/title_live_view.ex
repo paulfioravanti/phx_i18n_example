@@ -1,8 +1,6 @@
 defmodule PhxI18nExampleWeb.TitleLiveView do
   use Phoenix.LiveView
-  import PhxI18nExampleWeb.Gettext, only: [gettext: 1]
-  import Gettext, only: [with_locale: 2]
-  alias PhxI18nExampleWeb.Endpoint
+  alias PhxI18nExampleWeb.{Endpoint, TitleLiveComponent}
 
   @locale_changes "locale-changes"
 
@@ -14,11 +12,7 @@ defmodule PhxI18nExampleWeb.TitleLiveView do
 
   def render(assigns) do
     ~L"""
-    <%= with_locale(@locale, fn -> %>
-      <title>
-        <%= gettext("Multilingualisation in Phoenix") %>
-      </title>
-    <% end) %>
+    <%= live_component @socket, TitleLiveComponent, locale: @locale %>
     """
   end
 
