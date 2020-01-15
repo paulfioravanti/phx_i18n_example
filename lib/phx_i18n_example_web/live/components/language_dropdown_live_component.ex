@@ -5,9 +5,9 @@ defmodule PhxI18nExampleWeb.LanguageDropdownLiveComponent do
   @locales Gettext.known_locales(PhxI18nExampleWeb.Gettext)
   @locale_changes "locale-changes"
 
-  def update(assigns, socket) do
-    socket = assign(socket, assigns)
-    socket = init_dropdown_state(socket)
+  def update(%{locale: locale} = assigns, socket) do
+    state = Map.merge(assigns, init_dropdown_state(locale))
+    socket = assign(socket, state)
     {:ok, socket}
   end
 
@@ -34,20 +34,13 @@ defmodule PhxI18nExampleWeb.LanguageDropdownLiveComponent do
       %{locale: locale}
     )
 
-    socket = assign(socket, %{locale: locale})
-    socket = init_dropdown_state(socket)
+    state = Map.merge(%{locale: locale}, init_dropdown_state(locale))
+    socket = assign(socket, state)
     {:noreply, socket}
   end
 
-  defp init_dropdown_state(%{assigns: %{locale: locale}} = socket) do
+  defp init_dropdown_state(locale) do
     selectable_locales = List.delete(@locales, locale)
-
-    assign(
-      socket,
-      %{
-        selectable_locales: selectable_locales,
-        show_available_locales: false
-      }
-    )
+    %{selectable_locales: selectable_locales, show_available_locales: false}
   end
 end
