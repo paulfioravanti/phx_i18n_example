@@ -12,7 +12,10 @@ defmodule PhxI18nExampleWeb.TitleLiveView do
 
   def render(assigns) do
     ~L"""
-    <%= live_component @socket, TitleLiveComponent, locale: @locale %>
+    <%= live_component @socket,
+                       TitleLiveComponent,
+                       id: :title,
+                       locale: @locale %>
     """
   end
 
