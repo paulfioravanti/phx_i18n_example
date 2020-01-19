@@ -3,12 +3,12 @@ defmodule PhxI18nExampleWeb.LanguageDropdownLiveView do
   alias PhxI18nExampleWeb.{Endpoint, LanguageDropdownLiveComponent}
 
   @locales Gettext.known_locales(PhxI18nExampleWeb.Gettext)
-  @locale_changes "locale-changes"
-  @dropdown_changes "dropdown-changes"
+  @locale_changes "locale-changes:"
+  @dropdown_changes "dropdown-changes:"
 
-  def mount(%{locale: locale}, socket) do
-    Endpoint.subscribe(@dropdown_changes)
-    socket = init_dropdown_state(socket, locale)
+  def mount(%{locale: locale, user_id: user_id}, socket) do
+    Endpoint.subscribe(@dropdown_changes <> user_id)
+    socket = init_dropdown_state(socket, locale, user_id)
     {:ok, socket}
   end
 
@@ -34,11 +34,16 @@ defmodule PhxI18nExampleWeb.LanguageDropdownLiveView do
   end
 
   def handle_event("locale-changed", %{"locale" => locale}, socket) do
-    Endpoint.broadcast_from(self(), @locale_changes, "change-locale", %{
-      locale: locale
-    })
+    %{assigns: %{user_id: user_id}} = socket
 
-    socket = init_dropdown_state(socket, locale)
+    Endpoint.broadcast_from(
+      self(),
+      @locale_changes <> user_id,
+      "change-locale",
+      %{locale: locale}
+    )
+
+    socket = init_dropdown_state(socket, locale, user_id)
     {:noreply, socket}
   end
 
@@ -47,12 +52,13 @@ defmodule PhxI18nExampleWeb.LanguageDropdownLiveView do
     {:noreply, socket}
   end
 
-  defp init_dropdown_state(socket, locale) do
+  defp init_dropdown_state(socket, locale, user_id) do
     selectable_locales = List.delete(@locales, locale)
 
     assign(
       socket,
       %{
+        user_id: user_id,
         locale: locale,
         selectable_locales: selectable_locales,
         show_available_locales: false
