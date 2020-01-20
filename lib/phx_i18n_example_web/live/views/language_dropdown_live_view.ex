@@ -8,7 +8,8 @@ defmodule PhxI18nExampleWeb.LanguageDropdownLiveView do
 
   def mount(%{locale: locale, user_id: user_id}, socket) do
     Endpoint.subscribe(@dropdown_changes <> user_id)
-    socket = init_dropdown_state(socket, locale, user_id)
+    state = init_state(locale, user_id)
+    socket = assign(socket, state)
     {:ok, socket}
   end
 
@@ -28,22 +29,26 @@ defmodule PhxI18nExampleWeb.LanguageDropdownLiveView do
   end
 
   def handle_event("toggle", _value, socket) do
-    %{assigns: %{show_available_locales: show_available_locales}} = socket
-    socket = assign(socket, :show_available_locales, !show_available_locales)
+    socket =
+      assign(
+        socket,
+        :show_available_locales,
+        !socket.assigns.show_available_locales
+      )
+
     {:noreply, socket}
   end
 
   def handle_event("locale-changed", %{"locale" => locale}, socket) do
-    %{assigns: %{user_id: user_id}} = socket
-
     Endpoint.broadcast_from(
       self(),
-      @locale_changes <> user_id,
+      @locale_changes <> socket.assigns.user_id,
       "change-locale",
       %{locale: locale}
     )
 
-    socket = init_dropdown_state(socket, locale, user_id)
+    state = init_dropdown_state(locale)
+    socket = assign(socket, state)
     {:noreply, socket}
   end
 
@@ -52,17 +57,20 @@ defmodule PhxI18nExampleWeb.LanguageDropdownLiveView do
     {:noreply, socket}
   end
 
-  defp init_dropdown_state(socket, locale, user_id) do
+  defp init_state(locale, user_id) do
+    Map.merge(
+      %{user_id: user_id},
+      init_dropdown_state(locale)
+    )
+  end
+
+  defp init_dropdown_state(locale) do
     selectable_locales = List.delete(@locales, locale)
 
-    assign(
-      socket,
-      %{
-        user_id: user_id,
-        locale: locale,
-        selectable_locales: selectable_locales,
-        show_available_locales: false
-      }
-    )
+    %{
+      locale: locale,
+      selectable_locales: selectable_locales,
+      show_available_locales: false
+    }
   end
 end
