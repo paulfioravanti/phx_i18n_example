@@ -23,8 +23,13 @@ defmodule PhxI18nExampleWeb.LanguageDropdownLive do
   end
 
   def handle_event("toggle", _value, socket) do
-    %{assigns: %{show_available_locales: show_available_locales}} = socket
-    socket = assign(socket, :show_available_locales, !show_available_locales)
+    socket =
+      assign(
+        socket,
+        :show_available_locales,
+        !socket.assigns.show_available_locales
+      )
+
     {:noreply, socket}
   end
 
