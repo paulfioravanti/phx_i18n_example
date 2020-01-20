@@ -2,11 +2,11 @@ defmodule PhxI18nExampleWeb.LanguageDropdownLiveView do
   use Phoenix.LiveView
   alias PhxI18nExampleWeb.{Endpoint, LanguageDropdownLiveComponent}
 
-  @dropdown_changes "dropdown-changes"
+  @dropdown_changes "dropdown-changes:"
 
-  def mount(%{locale: locale}, socket) do
-    Endpoint.subscribe(@dropdown_changes)
-    socket = assign(socket, locale: locale)
+  def mount(%{locale: locale, user_id: user_id}, socket) do
+    Endpoint.subscribe(@dropdown_changes <> user_id)
+    socket = assign(socket, locale: locale, user_id: user_id)
     {:ok, socket}
   end
 
@@ -15,7 +15,8 @@ defmodule PhxI18nExampleWeb.LanguageDropdownLiveView do
     <%= live_component @socket,
                        LanguageDropdownLiveComponent,
                        id: :language_dropdown,
-                       locale: @locale %>
+                       locale: @locale,
+                       user_id: @user_id %>
     """
   end
 

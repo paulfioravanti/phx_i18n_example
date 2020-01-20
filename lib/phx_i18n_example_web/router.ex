@@ -1,6 +1,6 @@
 defmodule PhxI18nExampleWeb.Router do
   use PhxI18nExampleWeb, :router
-  alias PhxI18nExampleWeb.LocalePlug
+  alias PhxI18nExampleWeb.{LocalePlug, UserIdPlug}
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -9,6 +9,7 @@ defmodule PhxI18nExampleWeb.Router do
     plug Phoenix.LiveView.Flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug UserIdPlug
     plug LocalePlug
   end
 
@@ -18,6 +19,6 @@ defmodule PhxI18nExampleWeb.Router do
 
   scope "/", PhxI18nExampleWeb do
     pipe_through :browser
-    live "/", PageLiveView, session: [:locale]
+    live "/", PageLiveView, session: [:locale, :user_id]
   end
 end

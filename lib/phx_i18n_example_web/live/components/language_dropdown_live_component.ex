@@ -3,11 +3,16 @@ defmodule PhxI18nExampleWeb.LanguageDropdownLiveComponent do
   alias PhxI18nExampleWeb.{Endpoint, LanguageDropdownView}
 
   @locales Gettext.known_locales(PhxI18nExampleWeb.Gettext)
-  @locale_changes "locale-changes"
+  @locale_changes "locale-changes:"
 
   def update(%{locale: locale} = assigns, socket) do
     state = Map.merge(assigns, init_dropdown_state(locale))
     socket = assign(socket, state)
+    {:ok, socket}
+  end
+
+  def update(%{show_available_locales: false}, socket) do
+    socket = assign(socket, :show_available_locales, false)
     {:ok, socket}
   end
 
@@ -21,26 +26,41 @@ defmodule PhxI18nExampleWeb.LanguageDropdownLiveComponent do
   end
 
   def handle_event("toggle", _value, socket) do
-    %{assigns: %{show_available_locales: show_available_locales}} = socket
-    socket = assign(socket, :show_available_locales, !show_available_locales)
+    socket =
+      assign(
+        socket,
+        :show_available_locales,
+        !socket.assigns.show_available_locales
+      )
+
     {:noreply, socket}
   end
 
   def handle_event("locale-changed", %{"locale" => locale}, socket) do
     Endpoint.broadcast_from(
       self(),
-      @locale_changes,
+      @locale_changes <> socket.assigns.user_id,
       "change-locale",
       %{locale: locale}
     )
 
-    state = Map.merge(%{locale: locale}, init_dropdown_state(locale))
+    state = update_locale_changed_state(socket.assigns, locale)
     socket = assign(socket, state)
     {:noreply, socket}
   end
 
+  defp update_locale_changed_state(assigns, locale) do
+    assigns
+    |> Map.merge(%{locale: locale})
+    |> Map.merge(init_dropdown_state(locale))
+  end
+
   defp init_dropdown_state(locale) do
     selectable_locales = List.delete(@locales, locale)
-    %{selectable_locales: selectable_locales, show_available_locales: false}
+
+    %{
+      selectable_locales: selectable_locales,
+      show_available_locales: false
+    }
   end
 end

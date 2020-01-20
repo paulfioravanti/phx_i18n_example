@@ -2,11 +2,11 @@ defmodule PhxI18nExampleWeb.TitleLiveView do
   use Phoenix.LiveView
   alias PhxI18nExampleWeb.{Endpoint, TitleLiveComponent}
 
-  @locale_changes "locale-changes"
+  @locale_changes "locale-changes:"
 
-  def mount(%{locale: locale}, socket) do
-    Endpoint.subscribe(@locale_changes)
-    socket = assign(socket, locale: locale)
+  def mount(%{locale: locale, user_id: user_id}, socket) do
+    Endpoint.subscribe(@locale_changes <> user_id)
+    socket = assign(socket, :locale, locale)
     {:ok, socket}
   end
 
@@ -20,8 +20,7 @@ defmodule PhxI18nExampleWeb.TitleLiveView do
   end
 
   def handle_info(%{event: "change-locale", payload: payload}, socket) do
-    %{locale: locale} = payload
-    socket = assign(socket, :locale, locale)
+    socket = assign(socket, :locale, payload.locale)
     {:noreply, socket}
   end
 end
