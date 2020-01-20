@@ -9,13 +9,16 @@ defmodule PhxI18nExampleWeb.UserIdPlug do
 
   @impl Plug
   def call(conn, _opts) do
-    random_id =
-      @num_bytes
-      |> :crypto.strong_rand_bytes()
-      |> Base.encode64()
+    random_id = generate_random_id()
 
     conn
     |> Conn.assign(:user_id, random_id)
     |> Conn.put_session(:user_id, random_id)
+  end
+
+  defp generate_random_id do
+    @num_bytes
+    |> :crypto.strong_rand_bytes()
+    |> Base.encode64()
   end
 end

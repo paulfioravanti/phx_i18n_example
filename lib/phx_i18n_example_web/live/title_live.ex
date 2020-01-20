@@ -8,7 +8,7 @@ defmodule PhxI18nExampleWeb.TitleLive do
 
   def mount(%{locale: locale, user_id: user_id}, socket) do
     Endpoint.subscribe(@locale_changes <> user_id)
-    socket = assign(socket, %{locale: locale})
+    socket = assign(socket, locale: locale)
     {:ok, socket}
   end
 
@@ -23,8 +23,7 @@ defmodule PhxI18nExampleWeb.TitleLive do
   end
 
   def handle_info(%{event: "change-locale", payload: payload}, socket) do
-    %{locale: locale} = payload
-    socket = assign(socket, :locale, locale)
+    socket = assign(socket, :locale, payload.locale)
     {:noreply, socket}
   end
 end
