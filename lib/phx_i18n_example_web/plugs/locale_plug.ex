@@ -16,7 +16,7 @@ defmodule PhxI18nExampleWeb.LocalePlug do
 
     conn
     |> Conn.assign(:locale, locale)
-    |> Conn.put_session(:locale, locale)
+    |> Conn.put_session("locale", locale)
   end
 
   defp fetch_locale(conn) do

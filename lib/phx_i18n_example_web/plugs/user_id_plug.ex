@@ -13,7 +13,7 @@ defmodule PhxI18nExampleWeb.UserIdPlug do
 
     conn
     |> Conn.assign(:user_id, random_id)
-    |> Conn.put_session(:user_id, random_id)
+    |> Conn.put_session("user_id", random_id)
   end
 
   defp generate_random_id do

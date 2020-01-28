@@ -4,21 +4,22 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <%= csrf_meta_tag() %>
     <%= live_render @conn,
                     TitleLiveView,
-                    session: %{locale: @locale, user_id: @user_id} %>
+                    session: %{"locale" => @locale, "user_id" => @user_id} %>
     <link rel="stylesheet"
           href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+    <script type="text/javascript"
+            src="<%= Routes.static_path(@conn, "/js/app.js") %>">
+    </script>
   </head>
   <body class="<%= body() %>">
     <%= live_render @conn,
                     LanguageDropdownLiveView,
-                    session: %{locale: @locale, user_id: @user_id} %>
+                    session: %{"locale" => @locale, "user_id" => @user_id} %>
     <main role="main">
       <%= render @view_module, @view_template, assigns %>
     </main>
-    <script type="text/javascript"
-            src="<%= Routes.static_path(@conn, "/js/app.js") %>">
-    </script>
   </body>
 </html>

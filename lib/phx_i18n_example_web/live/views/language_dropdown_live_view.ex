@@ -4,7 +4,11 @@ defmodule PhxI18nExampleWeb.LanguageDropdownLiveView do
 
   @dropdown_changes "dropdown-changes:"
 
-  def mount(%{locale: locale, user_id: user_id}, socket) do
+  def mount(
+        :not_mounted_at_router,
+        %{"locale" => locale, "user_id" => user_id},
+        socket
+      ) do
     Endpoint.subscribe(@dropdown_changes <> user_id)
     socket = assign(socket, locale: locale, user_id: user_id)
     {:ok, socket}

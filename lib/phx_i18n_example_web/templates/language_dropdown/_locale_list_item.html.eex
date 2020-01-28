@@ -2,6 +2,7 @@
     id="<%= @locale %>"
     role="selectable_locale"
     phx-click="locale-changed"
+    phx-target="#<%= @locale %>"
     phx-value-locale="<%= @locale %>">
   <%= locale_string(@locale) %>
 </li>

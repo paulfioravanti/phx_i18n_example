@@ -14,22 +14,16 @@ import "tachyons"
 
 import { Socket } from "phoenix"
 import LiveSocket from "phoenix_live_view"
-import { Cookie } from "./cookie"
+import { Hooks } from "./hooks"
 
-const Hooks = {
-  currentLocale: {
-    mounted() {
-      Cookie.set(this.el.id)
-      // Clear params in case the locale was originally set using them.
-      window.history.replaceState({}, document.title, "/")
-    },
-    updated() {
-      Cookie.set(this.el.id)
-    }
-  }
-}
-
-let liveSocket = new LiveSocket("/live", Socket, { hooks: Hooks })
+const csrfToken =
+  document.querySelector("meta[name='csrf-token']").getAttribute("content")
+const liveSocket =
+  new LiveSocket(
+    "/live",
+    Socket,
+    { params: { _csrf_token: csrfToken }, hooks: Hooks }
+  )
 liveSocket.connect()
 
 // Import local files

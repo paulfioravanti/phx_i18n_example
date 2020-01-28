@@ -1,7 +1,14 @@
 defmodule PhxI18nExampleWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :phx_i18n_example
 
-  socket "/live", Phoenix.LiveView.Socket
+  @session_options [
+    store: :cookie,
+    key: "_phx_i18n_example_key",
+    signing_salt: "24yqmljf"
+  ]
+
+  socket "/live", Phoenix.LiveView.Socket,
+    websocket: [connect_info: [session: @session_options]]
 
   socket "/socket", PhxI18nExampleWeb.UserSocket,
     websocket: true,
@@ -39,10 +46,7 @@ defmodule PhxI18nExampleWeb.Endpoint do
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
   # Set :encryption_salt if you would also like to encrypt it.
-  plug Plug.Session,
-    store: :cookie,
-    key: "_phx_i18n_example_key",
-    signing_salt: "24yqmljf"
+  plug Plug.Session, @session_options
 
   plug PhxI18nExampleWeb.Router
 end
