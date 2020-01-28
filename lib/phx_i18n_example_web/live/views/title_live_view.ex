@@ -4,9 +4,8 @@ defmodule PhxI18nExampleWeb.TitleLiveView do
 
   @locale_changes "locale-changes:"
 
-  # :not_mounted_at_router,
   def mount(
-        _params,
+        :not_mounted_at_router,
         %{"locale" => locale, "user_id" => user_id},
         socket
       ) do
