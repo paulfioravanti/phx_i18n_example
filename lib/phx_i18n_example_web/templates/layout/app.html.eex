@@ -13,11 +13,6 @@
     </script>
   </head>
   <body class="<%= body() %>">
-    <%= live_render @conn,
-                    LanguageDropdownLiveView,
-                    session: %{"locale" => @locale, "user_id" => @user_id} %>
-    <main role="main">
-      <%= render @view_module, @view_template, assigns %>
-    </main>
+    <%= render @view_module, @view_template, assigns %>
   </body>
 </html>

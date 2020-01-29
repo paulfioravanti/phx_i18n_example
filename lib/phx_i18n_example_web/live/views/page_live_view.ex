@@ -1,6 +1,6 @@
 defmodule PhxI18nExampleWeb.PageLiveView do
-  use Phoenix.LiveView
-  alias PhxI18nExampleWeb.{Endpoint, PageLiveComponent}
+  alias PhxI18nExampleWeb.{Endpoint, LayoutView, PageLiveComponent}
+  use Phoenix.LiveView, layout: {LayoutView, "live.html"}
   require Gettext
   require PhxI18nExampleWeb.Gettext
 
