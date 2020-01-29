@@ -1,2 +1,2 @@
-git push origin master
-git push heroku master
+git push origin 08-live-stateful-0-6
+git push heroku-08-live-stateful-0-6 08-live-stateful-0-6:master
