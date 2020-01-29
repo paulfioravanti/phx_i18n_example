@@ -1,0 +1,6 @@
+<%= with_locale(@locale, fn -> %>
+  <title>
+    <%= gettext("Multilingualisation in Phoenix") %>
+  </title>
+<% end) %>
+<%= @live_view_module.render(assigns) %>

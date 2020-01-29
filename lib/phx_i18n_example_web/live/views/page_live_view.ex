@@ -1,6 +1,6 @@
 defmodule PhxI18nExampleWeb.PageLiveView do
-  use Phoenix.LiveView
-  alias PhxI18nExampleWeb.{Endpoint, PageLiveComponent}
+  alias PhxI18nExampleWeb.{Endpoint, LayoutView, PageLiveComponent}
+  use Phoenix.LiveView, layout: {LayoutView, "live.html"}
 
   @locale_changes "locale-changes:"
 
@@ -24,8 +24,12 @@ defmodule PhxI18nExampleWeb.PageLiveView do
     """
   end
 
-  def handle_info(%{event: "change-locale", payload: payload}, socket) do
-    send_update(PageLiveComponent, id: :page, locale: payload.locale)
+  def handle_info(
+        %{event: "change-locale", payload: %{locale: locale}},
+        socket
+      ) do
+    send_update(PageLiveComponent, id: :page, locale: locale)
+    socket = assign(socket, :locale, locale)
     {:noreply, socket}
   end
 end
