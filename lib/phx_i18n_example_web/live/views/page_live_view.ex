@@ -1,7 +1,10 @@
 defmodule PhxI18nExampleWeb.PageLiveView do
-  alias PhxI18nExampleWeb.{Endpoint, LayoutView, PageLiveComponent}
-  use Phoenix.LiveView, layout: {LayoutView, "live.html"}
+  use Phoenix.LiveView
+  alias PhxI18nExampleWeb.{Endpoint, PageLiveComponent}
+  require Gettext
+  require PhxI18nExampleWeb.Gettext
 
+  @title "Multilingualisation in Phoenix"
   @locale_changes "locale-changes:"
 
   def mount(
@@ -10,7 +13,15 @@ defmodule PhxI18nExampleWeb.PageLiveView do
         socket
       ) do
     Endpoint.subscribe(@locale_changes <> user_id)
-    socket = assign(socket, locale: locale, user_id: user_id)
+
+    socket =
+      assign(
+        socket,
+        locale: locale,
+        user_id: user_id,
+        page_title: page_title(locale)
+      )
+
     {:ok, socket}
   end
 
@@ -29,7 +40,10 @@ defmodule PhxI18nExampleWeb.PageLiveView do
         socket
       ) do
     send_update(PageLiveComponent, id: :page, locale: locale)
-    socket = assign(socket, :locale, locale)
+    socket = assign(socket, locale: locale, page_title: page_title(locale))
     {:noreply, socket}
   end
+
+  defp page_title(locale), do: Gettext.with_locale(locale, &title/0)
+  defp title, do: PhxI18nExampleWeb.Gettext.gettext(@title)
 end
