@@ -1,7 +1,8 @@
-<%= live_render @socket,
-                LanguageDropdownLiveView,
-                id: :language_dropdown,
-                session: %{"locale" => @locale, "user_id" => @user_id} %>
+<%= live_component @socket,
+                   LanguageDropdownLiveComponent,
+                   id: :language_dropdown,
+                   locale: @locale,
+                   user_id: @user_id %>
 <main role="main">
   <%= @live_view_module.render(assigns) %>
 </main>

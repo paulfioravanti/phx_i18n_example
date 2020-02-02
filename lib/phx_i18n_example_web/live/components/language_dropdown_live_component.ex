@@ -1,9 +1,8 @@
 defmodule PhxI18nExampleWeb.LanguageDropdownLiveComponent do
   use Phoenix.LiveComponent
-  alias PhxI18nExampleWeb.{Endpoint, LanguageDropdownView}
+  alias PhxI18nExampleWeb.LanguageDropdownView
 
   @locales Gettext.known_locales(PhxI18nExampleWeb.Gettext)
-  @locale_changes "locale-changes:"
 
   def update(%{locale: locale} = assigns, socket) do
     state = Map.merge(assigns, init_dropdown_state(locale))
@@ -37,12 +36,7 @@ defmodule PhxI18nExampleWeb.LanguageDropdownLiveComponent do
   end
 
   def handle_event("locale-changed", %{"locale" => locale}, socket) do
-    Endpoint.broadcast_from(
-      self(),
-      @locale_changes <> socket.assigns.user_id,
-      "change-locale",
-      %{locale: locale}
-    )
+    send(self(), {:change_locale, locale})
 
     state = update_locale_changed_state(socket.assigns, locale)
     socket = assign(socket, state)

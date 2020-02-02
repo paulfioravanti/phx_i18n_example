@@ -1,19 +1,21 @@
 defmodule PhxI18nExampleWeb.PageLiveView do
-  alias PhxI18nExampleWeb.{Endpoint, LayoutView, PageLiveComponent}
+  alias PhxI18nExampleWeb.{
+    LanguageDropdownLiveComponent,
+    LayoutView,
+    PageLiveComponent
+  }
+
   use Phoenix.LiveView, layout: {LayoutView, "page.html"}
   require Gettext
   require PhxI18nExampleWeb.Gettext
 
   @title "Multilingualisation in Phoenix"
-  @locale_changes "locale-changes:"
 
   def mount(
         %{} = _params,
         %{"locale" => locale, "user_id" => user_id},
         socket
       ) do
-    Endpoint.subscribe(@locale_changes <> user_id)
-
     socket =
       assign(
         socket,
@@ -35,10 +37,17 @@ defmodule PhxI18nExampleWeb.PageLiveView do
     """
   end
 
-  def handle_info(
-        %{event: "change-locale", payload: %{locale: locale}},
-        socket
-      ) do
+  def handle_info(:hide_dropdown, socket) do
+    send_update(
+      LanguageDropdownLiveComponent,
+      id: :language_dropdown,
+      show_available_locales: false
+    )
+
+    {:noreply, socket}
+  end
+
+  def handle_info({:change_locale, locale}, socket) do
     send_update(PageLiveComponent, id: :page, locale: locale)
     socket = assign(socket, locale: locale, page_title: page_title(locale))
     {:noreply, socket}
