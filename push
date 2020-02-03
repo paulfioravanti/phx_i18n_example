@@ -1,2 +1,2 @@
-git push origin 09-live-layout
-git push heroku-09-live-layout 09-live-layout:master
+git push origin master
+git push heroku master

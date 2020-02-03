@@ -12,7 +12,7 @@ use Mix.Config
 config :phx_i18n_example, PhxI18nExampleWeb.Endpoint,
   http: [:inet6, port: System.get_env("PORT") || 4000],
   url: [
-    host: "phx-i18n-09-live-layout.herokuapp.com",
+    host: "phx-i18n.herokuapp.com",
     port: 443,
     scheme: "https"
   ],
