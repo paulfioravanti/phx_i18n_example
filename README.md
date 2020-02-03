@@ -6,6 +6,7 @@ It was created as part of a series of blog posts I wrote about LiveView:
 
 - _[Internationalisation with Phoenix LiveView][]_
 - _[Internationalisation with Phoenix LiveComponents][]_
+- _[Internationalisation with Phoenix Live Layouts][]_
 
 It re-implements [Tachyons][]'
 [Full Screen Centered Title component documentation page][] in [Phoenix][], adds
@@ -35,6 +36,7 @@ Open <http://localhost:4000>
 [Elm]: http://elm-lang.org/
 [Elm I18n Example]: https://github.com/paulfioravanti/elm-i18n-example
 [Internationalisation with Phoenix LiveComponents]: https://paulfioravanti.com/blog/2020/01/27/internationalisation-with-phoenix-live-components/
+[Internationalisation with Phoenix Live Layouts]: https://paulfioravanti.com/blog/2020/02/03/internationalisation-with-phoenix-live-layouts/
 [Internationalisation with Phoenix LiveView]: https://paulfioravanti.com/blog/2019/11/03/internationalisation-with-phoenix-liveview/
 [Full Screen Centered Title component documentation page]: http://tachyons.io/components/layout/full-screen-centered-title/index.html
 [Phoenix]: https://phoenixframework.org/
