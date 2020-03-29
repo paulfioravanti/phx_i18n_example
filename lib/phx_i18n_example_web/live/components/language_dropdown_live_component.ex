@@ -38,15 +38,9 @@ defmodule PhxI18nExampleWeb.LanguageDropdownLiveComponent do
   def handle_event("locale-changed", %{"locale" => locale}, socket) do
     send(self(), {:change_locale, locale})
 
-    state = update_locale_changed_state(socket.assigns, locale)
+    state = Map.merge(%{locale: locale}, init_dropdown_state(locale))
     socket = assign(socket, state)
     {:noreply, socket}
-  end
-
-  defp update_locale_changed_state(assigns, locale) do
-    assigns
-    |> Map.merge(%{locale: locale})
-    |> Map.merge(init_dropdown_state(locale))
   end
 
   defp init_dropdown_state(locale) do
