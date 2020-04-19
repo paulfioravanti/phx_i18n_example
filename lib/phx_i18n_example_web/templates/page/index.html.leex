@@ -2,7 +2,7 @@
   <article class="<%= article() %>"
            id="main-content"
            phx-click="hide-dropdown"
-           phx-target="#main-content">
+           phx-target="<%= @myself %>">
     <div class="<%= heading_container() %>">
       <h1 class="<%= heading() %>">
         <%= gettext("Vertically centering things in css is easy!") %>

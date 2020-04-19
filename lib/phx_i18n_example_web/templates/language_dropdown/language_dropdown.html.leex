@@ -1,7 +1,7 @@
 <div class="<%= dropdown_container() %>"
      id="dropdown-container"
      phx-click="hide"
-     phx-target="#dropdown-container">
+     phx-target="<%= @myself %>">
   <%= render LanguageDropdownView,
              "_current_locale.html",
              locale: @locale,
