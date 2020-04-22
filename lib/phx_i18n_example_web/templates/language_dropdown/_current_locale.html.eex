@@ -3,7 +3,7 @@
    id="<%= @locale %>"
    phx-click="toggle"
    phx-hook="currentLocale"
-   phx-target="#<%= @locale %>">
+   phx-target="<%= @myself %>">
   <span><%= locale_string(@locale) %></span>
   <span class="<%= caret() %>">▾</span>
 </p>

@@ -1,8 +1,8 @@
 <li class="<%= dropdown_list_item() %>"
-    id="<%= @locale %>"
+    id="<%= @locale %>-selection"
     role="selectable_locale"
     phx-click="locale-changed"
-    phx-target="#<%= @locale %>"
+    phx-target="<%= @myself %>"
     phx-value-locale="<%= @locale %>">
   <%= locale_string(@locale) %>
 </li>
