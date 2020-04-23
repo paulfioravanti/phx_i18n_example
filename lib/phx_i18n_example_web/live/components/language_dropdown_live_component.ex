@@ -19,6 +19,14 @@ defmodule PhxI18nExampleWeb.LanguageDropdownLiveComponent do
     LanguageDropdownView.render("language_dropdown.html", assigns)
   end
 
+  def handle_event(
+        "hide",
+        _value,
+        %{assigns: %{show_available_locales: false}} = socket
+      ) do
+    {:noreply, socket}
+  end
+
   def handle_event("hide", _value, socket) do
     socket = assign(socket, :show_available_locales, false)
     {:noreply, socket}
