@@ -8,6 +8,8 @@ defmodule PhxI18nExample.Application do
   def start(_type, _args) do
     # List all child processes to be supervised
     children = [
+      # Start the PubSub system
+      {Phoenix.PubSub, name: PhxI18nExample.PubSub},
       # Start the endpoint when the application starts
       PhxI18nExampleWeb.Endpoint
       # Starts a worker by calling: PhxI18nExample.Worker.start_link(arg)
